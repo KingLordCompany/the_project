@@ -13,12 +13,14 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'King Lord';
         $this->load->view('templates/header');
+        $this->load->view('templates/topbar');
         $this->load->view('admin/profile', $data);
         $this->load->view('templates/footer');
     }
     public function index()
     {
         $this->load->view('templates/header');
+        $this->load->view('templates/topbar');
         $this->load->view('admin/index');
         $this->load->view('templates/footer');
     }
@@ -29,6 +31,7 @@ class Admin extends CI_Controller
         $data['judul'] = 'User';
         $data['admin'] = $this->Admin_Model->get_all();
         $this->load->view('templates/header');
+        $this->load->view('templates/topbar');
         $this->load->view('admin/user', $data);
         $this->load->view('templates/footer');
     }
@@ -83,6 +86,7 @@ class Admin extends CI_Controller
         $data['judul'] = 'Produk';
         $data['produk'] = $this->Admin_Model->get_all_produk();
         $this->load->view('templates/header');
+        $this->load->view('templates/topbar');
         $this->load->view('admin/produk', $data);
         $this->load->view('templates/footer');
     }

@@ -41,12 +41,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <?= form_open('katering/login') ?>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Masukan Email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary">Login</button>
             </div>
+            <?= form_close() ?>
         </div>
     </div>
 </div>
@@ -66,32 +75,32 @@
                 <?= form_open('katering/daftar') ?>
                 <div class="form-group">
                     <label for="nama">Nama</label>
-                    <input type="text" class="form-control" id="nama" aria-describedby="emailHelp" placeholder="Masukan Nama">
+                    <input type="text" class="form-control" name="nama" id="nama" aria-describedby="emailHelp" placeholder="Masukan Nama">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Masukan Email">
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Masukan Email">
                 </div>
                 <div class="form-group">
                     <label for="telpon">Telpon</label>
-                    <input type="tel" class="form-control" id="telpon" aria-describedby="emailHelp" placeholder="Masukan Telpon">
+                    <input type="tel" class="form-control" name="telpon" id="telpon" aria-describedby="emailHelp" placeholder="Masukan Telpon">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Alamat</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="password-daftar" placeholder="Password">
+                    <input type="password" class="form-control" name="pass1" id="password-daftar" placeholder="Password">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Konfirmai Password</label>
-                    <input type="password" class="form-control" id="password-daftar-confirm" placeholder="Password">
+                    <input type="password" class="form-control" name="pass2" id="password-daftar-confirm" placeholder="Password">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Daftar</button>
+                <button type="submit" class="btn btn-primary">Daftar</button>
             </div>
             <?= form_close() ?>
         </div>

@@ -3,7 +3,7 @@
         <h1>Halaman <?= $judul ?></h1>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Tambah User
+            Tambah <?= $judul ?>
         </button>
         <div class="alert">
             <?= $this->session->flashdata('alert'); ?>

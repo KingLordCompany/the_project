@@ -8,7 +8,7 @@
         <?= $this->session->flashdata('alert'); ?>
     </div>
 </div>
-
+<?= $this->session->userdata('id_pelanggan'); ?>
 <div class="container d-flex justify-content-center">
     <div class="row">
         <?php foreach ($produk as $produk) { ?>

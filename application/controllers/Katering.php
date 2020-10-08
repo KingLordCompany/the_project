@@ -23,7 +23,7 @@ class Katering extends CI_Controller
 
         $id = $this->Katering_Model->produk_where($id);
         if ($id['id_produk']) {
-            $user = $this->session->userdata('id_user');
+            $user = $this->session->userdata('id_pelanggan');
             if ($user) {
                 $data['pesan'] = $id;
                 $this->load->view('templates/header');
@@ -47,20 +47,25 @@ class Katering extends CI_Controller
     public function add_pesan()
     {
         $id = $this->input->post('pesan');
-        $this->form_validation->set_rules('pesan', 'Pesan', 'required');
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
-            Data gagal dihapus
+            Data gagal dimasukan
           </div>');
             redirect('katering/pesan/' . $id);
         } else {
+            $number = $this->session->userdata('number');
+            if (isset($number)) {
+                $number += 1;
+                $number = $this->session->set_userdata('number', $number);
+            } else {
+                $number =  $this->session->set_userdata('number', 1);
+            }
+            $number = $this->session->userdata('number');
             $data = $this->input->post();
-            $this->Admin_Model->delete_produk($data);
-
-            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
-                Data berhasil dihapus
-              </div>');
-            redirect('katering/pesan');
+            $_SESSION['daftar'][$number] = $data;
+            $info =  $this->session->userdata('daftar');
+            print_r($info);
         }
     }
 
@@ -103,8 +108,7 @@ class Katering extends CI_Controller
             if ($check) {
                 if ($check['email'] == $data['email']) {
                     if ($check['password'] == $data['password']) {
-                        $user = ['id_user' => $check['id_user']];
-                        $this->session->set_userdata($user);
+                        $this->session->set_userdata('id_pelanggan', $check['id_pelanggan']);
                         $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
                             Berhasil Login
                         </div>');
@@ -128,5 +132,14 @@ class Katering extends CI_Controller
                 redirect('katering/index');
             }
         }
+    }
+    public function pesanan()
+    {
+        $data['produk'] = $this->Katering_Model->produk();
+        $data['detail'] = $this->session->userdata('daftar');
+        $this->load->view('templates/header');
+        $this->load->view('templates/topbar_f');
+        $this->load->view('katering/pesanan', $data);
+        $this->load->view('templates/footer');
     }
 }

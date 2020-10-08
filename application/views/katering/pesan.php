@@ -3,7 +3,7 @@
         <h1 class="display-4"><?= $pesan['nama_produk'] ?></h1>
         <img src="<?= base_url('assets/img/' . $pesan['foto']) ?>" class="img-fluid" alt="Responsive image">
         <hr class="my-4">
-        <?= form_open('keterangan/add_pesan') ?>
+        <?= form_open('katering/add_pesan') ?>
         <input type="hidden" name="pesan" value="<?= $pesan['id_produk'] ?>">
         <div class="form-group">
             <label for="exampleInputEmail1">Jumlah Pemesanan</label>

@@ -33,12 +33,8 @@
                     </tr>
                 <?php } ?>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="bg-info text-white">Total</td>
-                    <td colspan="4">Rp. <?= number_format($total) ?></td>
+                    <td colspan="5" class="bg-info text-white">Total</td>
+                    <td colspan="1">Rp. <?= number_format($total) ?></td>
                 </tr>
             </tbody>
         </table>

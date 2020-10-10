@@ -6,6 +6,10 @@ class Katering_Model extends CI_Model
     {
         return $this->db->get('tb_produk')->result_array();
     }
+    public function user_by_id($id)
+    {
+        return $this->db->where('id_pelanggan', $id)->get('tb_pelanggan')->row_array();
+    }
     public function produk_where($id)
     {
         return $this->db->where('id_produk', $id)->get('tb_produk')->row_array();

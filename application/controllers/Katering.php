@@ -64,8 +64,7 @@ class Katering extends CI_Controller
             $number = $this->session->userdata('number');
             $data = $this->input->post();
             $_SESSION['daftar'][$number] = $data;
-            $info =  $this->session->userdata('daftar');
-            print_r($info);
+            redirect('katering/pesanan');
         }
     }
 
@@ -135,6 +134,8 @@ class Katering extends CI_Controller
     }
     public function pesanan()
     {
+        $user = $this->session->userdata('id_pelanggan');
+        $data['user'] = $this->Katering_Model->user_by_id($user);
         $data['produk'] = $this->Katering_Model->produk();
         $data['detail'] = $this->session->userdata('daftar');
         $this->load->view('templates/header');

@@ -39,8 +39,41 @@
             </tbody>
         </table>
         <div class="d-flex justify-content-between">
-            <a href="" class="btn btn-primary">Pemesanan</a>
-            <a href="" class="btn btn-success">Bayar Pesanan <i class="fas fa-money-bill-wave"></i></a>
+            <a href="<?= base_url('katering') ?>" class="btn btn-primary">Pemesanan</a>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Bayar Pesanan <i class="fas fa-money-bill-wave"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?= form_open() ?>
+            <input type="hidden" name="trans" value="<?= $user['email'] ?>">
+            <div class="modal-body">
+                <h5>Lakukan pembayaran via bank terdekat</h5>
+                Pelanggan : <br>
+                <h6><?= $user['nm_pelanggan'] ?></h6>
+                Total : <h4>Rp. <?= number_format($total) ?></h4>
+                <hr>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tanggal Pengiriman</label>
+                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" require min="<?= date('Y-m-d') ?>">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Bayar</button>
+            </div>
+            <?= form_close() ?>
         </div>
     </div>
 </div>

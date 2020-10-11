@@ -1,6 +1,7 @@
 <div class="container mt-3">
     <div class="jumbotron">
         <h1 class="display-4">Daftar Pesanan</h1>
+        <?= $this->session->flashdata('alert'); ?>
         <hr class="my-4">
         <table class="table">
             <thead class="thead-dark">
@@ -15,6 +16,10 @@
             </thead>
             <tbody>
                 <?php
+                $now = date('Y-m-d');
+                $now = strtotime($now);
+                $now = strtotime('+1 day', $now);
+                $tanggal = date('Y-m-d', $now);
                 $no = 1;
                 $total = 0;
                 foreach ($detail as $detail) {
@@ -56,18 +61,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open() ?>
-            <input type="hidden" name="trans" value="<?= $user['email'] ?>">
+            <?= form_open('katering/transaksi') ?>
             <div class="modal-body">
                 <h5>Lakukan pembayaran via bank terdekat</h5>
                 Pelanggan : <br>
                 <h6><?= $user['nm_pelanggan'] ?></h6>
                 Total : <h4>Rp. <?= number_format($total) ?></h4>
                 <hr>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Tanggal Pengiriman</label>
-                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" require min="<?= date('Y-m-d') ?>">
+                <label for="exampleFormControlInput1">Tanggal dan Waktu pengiriman</label>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="date" name="tanggal" class="form-control" min="<?= $tanggal ?>">
+                    </div>
+                    <div class="col">
+                        <input type="time" name="waktu" class="form-control">
+                    </div>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

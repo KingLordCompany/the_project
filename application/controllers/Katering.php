@@ -8,6 +8,7 @@ class Katering extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Katering_Model');
+        require APPPATH . 'third_party/dompdf/dompdf_config.inc.php';
     }
 
     public function index()
@@ -142,5 +143,39 @@ class Katering extends CI_Controller
         $this->load->view('templates/topbar_f');
         $this->load->view('katering/pesanan', $data);
         $this->load->view('templates/footer');
+    }
+    public function transaksi()
+    {
+
+        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+        $this->form_validation->set_rules('waktu', 'Waktu', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Gagal Melakukan Transaksi
+          </div>');
+            redirect('katering/pesanan');
+        } else {
+            $data = $this->input->post();
+            $date = $data['tanggal'];
+            $waktu = $data['waktu'];
+            $tanggal = date('Y-m-d H:i:s', strtotime("$date $waktu"));
+            $user = $this->session->userdata('id_pelanggan');
+            $data['pelanggan'] =  $user;
+            $data['antar'] = $tanggal;
+            $this->Katering_Model->insert_pemmesanan($data);
+            $daftar = $this->session->userdata('daftar');
+            $nota = $this->Katering_Model->get_nota($user);
+            foreach ($daftar as $data_detail) {
+                $data_detail['nota'] = $nota['nota'];
+                $produk = $this->Katering_Model->produk_once($data_detail['pesan']);
+                $data_detail['total'] =  $produk['harga'] * $data_detail['jumlah'];
+                $this->Katering_Model->insert_daftar_pesan($data_detail);
+            }
+        }
+    }
+
+    public function coba()
+    {
+        $this->load->library('pdf');
     }
 }

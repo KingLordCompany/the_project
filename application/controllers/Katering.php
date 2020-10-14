@@ -176,6 +176,13 @@ class Katering extends CI_Controller
 
     public function coba()
     {
-        $this->load->library('pdf');
+        $dompdf = new DOMPDF();
+        $data = ['nama' => 'fahmy'];
+        $html = $this->load->view('laporan/invoice', $data, true);
+        $dompdf->load_html($html);
+        $dompdf->set_paper('A4', 'landscape');
+        $dompdf->render();
+        $pdf = $dompdf->output();
+        $dompdf->stream('invoice.pdf', ['Attachmment' => false]);
     }
 }

@@ -8,6 +8,7 @@ class Katering extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Katering_Model');
+        require APPPATH . 'third_party/dompdf/dompdf_config.inc.php';
     }
 
     public function index()
@@ -23,7 +24,7 @@ class Katering extends CI_Controller
 
         $id = $this->Katering_Model->produk_where($id);
         if ($id['id_produk']) {
-            $user = $this->session->userdata('id_user');
+            $user = $this->session->userdata('id_pelanggan');
             if ($user) {
                 $data['pesan'] = $id;
                 $this->load->view('templates/header');
@@ -47,20 +48,24 @@ class Katering extends CI_Controller
     public function add_pesan()
     {
         $id = $this->input->post('pesan');
-        $this->form_validation->set_rules('pesan', 'Pesan', 'required');
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
-            Data gagal dihapus
+            Data gagal dimasukan
           </div>');
             redirect('katering/pesan/' . $id);
         } else {
+            $number = $this->session->userdata('number');
+            if (isset($number)) {
+                $number += 1;
+                $number = $this->session->set_userdata('number', $number);
+            } else {
+                $number =  $this->session->set_userdata('number', 1);
+            }
+            $number = $this->session->userdata('number');
             $data = $this->input->post();
-            $this->Admin_Model->delete_produk($data);
-
-            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
-                Data berhasil dihapus
-              </div>');
-            redirect('katering/pesan');
+            $_SESSION['daftar'][$number] = $data;
+            redirect('katering/pesanan');
         }
     }
 
@@ -103,8 +108,7 @@ class Katering extends CI_Controller
             if ($check) {
                 if ($check['email'] == $data['email']) {
                     if ($check['password'] == $data['password']) {
-                        $user = ['id_user' => $check['id_user']];
-                        $this->session->set_userdata($user);
+                        $this->session->set_userdata('id_pelanggan', $check['id_pelanggan']);
                         $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
                             Berhasil Login
                         </div>');
@@ -128,5 +132,57 @@ class Katering extends CI_Controller
                 redirect('katering/index');
             }
         }
+    }
+    public function pesanan()
+    {
+        $user = $this->session->userdata('id_pelanggan');
+        $data['user'] = $this->Katering_Model->user_by_id($user);
+        $data['produk'] = $this->Katering_Model->produk();
+        $data['detail'] = $this->session->userdata('daftar');
+        $this->load->view('templates/header');
+        $this->load->view('templates/topbar_f');
+        $this->load->view('katering/pesanan', $data);
+        $this->load->view('templates/footer');
+    }
+    public function transaksi()
+    {
+
+        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+        $this->form_validation->set_rules('waktu', 'Waktu', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Gagal Melakukan Transaksi
+          </div>');
+            redirect('katering/pesanan');
+        } else {
+            $data = $this->input->post();
+            $date = $data['tanggal'];
+            $waktu = $data['waktu'];
+            $tanggal = date('Y-m-d H:i:s', strtotime("$date $waktu"));
+            $user = $this->session->userdata('id_pelanggan');
+            $data['pelanggan'] =  $user;
+            $data['antar'] = $tanggal;
+            $this->Katering_Model->insert_pemmesanan($data);
+            $daftar = $this->session->userdata('daftar');
+            $nota = $this->Katering_Model->get_nota($user);
+            foreach ($daftar as $data_detail) {
+                $data_detail['nota'] = $nota['nota'];
+                $produk = $this->Katering_Model->produk_once($data_detail['pesan']);
+                $data_detail['total'] =  $produk['harga'] * $data_detail['jumlah'];
+                $this->Katering_Model->insert_daftar_pesan($data_detail);
+            }
+        }
+    }
+
+    public function coba()
+    {
+        $dompdf = new DOMPDF();
+        $data = ['nama' => 'fahmy'];
+        $html = $this->load->view('laporan/invoice', $data, true);
+        $dompdf->load_html($html);
+        $dompdf->set_paper('A4', 'landscape');
+        $dompdf->render();
+        $pdf = $dompdf->output();
+        $dompdf->stream('invoice.pdf', ['Attachmment' => false]);
     }
 }

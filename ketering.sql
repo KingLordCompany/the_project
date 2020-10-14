@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Okt 2020 pada 17.32
+-- Waktu pembuatan: 14 Okt 2020 pada 14.47
 -- Versi server: 10.1.30-MariaDB
 -- Versi PHP: 7.2.2
 
@@ -46,10 +46,21 @@ CREATE TABLE `tb_detail_produk` (
   `id_detail` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
   `nota_produk` int(11) NOT NULL,
-  `total harga` int(11) NOT NULL,
+  `total_harga` int(11) NOT NULL,
   `catatan` varchar(30) NOT NULL,
   `jumlah_pesan` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_detail_produk`
+--
+
+INSERT INTO `tb_detail_produk` (`id_detail`, `id_produk`, `nota_produk`, `total_harga`, `catatan`, `jumlah_pesan`) VALUES
+(4, 2, 15, 360000, 'pedes lek', 30),
+(5, 3, 15, 260000, 'kuning langsat', 20),
+(6, 2, 16, 360000, 'pedes lek', 30),
+(7, 3, 16, 260000, 'kuning langsat', 20),
+(8, 4, 16, 200000, 'ojo asin', 20);
 
 -- --------------------------------------------------------
 
@@ -84,10 +95,18 @@ CREATE TABLE `tb_pemesanan` (
   `nota_pemesanan` int(11) NOT NULL,
   `id_pelanggan` int(11) NOT NULL,
   `tgl_order` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `tgl_antar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `tgl_antar` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `status_bayar` enum('belum','dp','lunas') NOT NULL,
   `status_antar` enum('belum','selesai') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_pemesanan`
+--
+
+INSERT INTO `tb_pemesanan` (`nota_pemesanan`, `id_pelanggan`, `tgl_order`, `tgl_antar`, `status_bayar`, `status_antar`) VALUES
+(15, 1, '2020-10-11 09:06:43', '2020-10-12 09:11:00', 'belum', 'belum'),
+(16, 1, '2020-10-11 09:07:16', '2020-10-14 09:10:00', 'belum', 'belum');
 
 -- --------------------------------------------------------
 
@@ -129,8 +148,8 @@ ALTER TABLE `tb_admin`
 --
 ALTER TABLE `tb_detail_produk`
   ADD PRIMARY KEY (`id_detail`),
-  ADD UNIQUE KEY `nota_produk` (`nota_produk`),
-  ADD UNIQUE KEY `id_produk` (`id_produk`);
+  ADD KEY `nota_produk` (`nota_produk`),
+  ADD KEY `id_produk` (`id_produk`);
 
 --
 -- Indeks untuk tabel `tb_pelanggan`
@@ -143,7 +162,7 @@ ALTER TABLE `tb_pelanggan`
 --
 ALTER TABLE `tb_pemesanan`
   ADD PRIMARY KEY (`nota_pemesanan`),
-  ADD UNIQUE KEY `id_pelanggan` (`id_pelanggan`);
+  ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
 -- Indeks untuk tabel `tb_produk`
@@ -165,7 +184,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT untuk tabel `tb_detail_produk`
 --
 ALTER TABLE `tb_detail_produk`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pelanggan`
@@ -177,7 +196,7 @@ ALTER TABLE `tb_pelanggan`
 -- AUTO_INCREMENT untuk tabel `tb_pemesanan`
 --
 ALTER TABLE `tb_pemesanan`
-  MODIFY `nota_pemesanan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `nota_pemesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_produk`
@@ -193,8 +212,8 @@ ALTER TABLE `tb_produk`
 -- Ketidakleluasaan untuk tabel `tb_detail_produk`
 --
 ALTER TABLE `tb_detail_produk`
-  ADD CONSTRAINT `tb_detail_produk_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `tb_produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_detail_produk_ibfk_2` FOREIGN KEY (`nota_produk`) REFERENCES `tb_pemesanan` (`nota_pemesanan`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_detail_produk_ibfk_1` FOREIGN KEY (`nota_produk`) REFERENCES `tb_pemesanan` (`nota_pemesanan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_detail_produk_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `tb_produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_pemesanan`

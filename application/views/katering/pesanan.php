@@ -23,8 +23,8 @@
                 $no = 1;
                 $total = 0;
                 foreach ($detail as $detail) {
-                    $produk =  $this->Katering_Model->produk_where($detail['pesan']);
-                    $qty = $detail['jumlah'];
+                    $produk =  $this->Katering_Model->produk_where($detail['id_produk']);
+                    $qty = $detail['jumlah_pesan'];
                     $satuan = $produk['harga'];
                     $total += $qty * $satuan;
                 ?>

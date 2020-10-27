@@ -55,16 +55,12 @@ class Katering extends CI_Controller
           </div>');
             redirect('katering/pesan/' . $id);
         } else {
-            $number = $this->session->userdata('number');
-            if (isset($number)) {
-                $number += 1;
-                $number = $this->session->set_userdata('number', $number);
-            } else {
-                $number =  $this->session->set_userdata('number', 1);
-            }
-            $number = $this->session->userdata('number');
             $data = $this->input->post();
-            $_SESSION['daftar'][$number] = $data;
+            $id_pesan = $data['pesan'];
+            $pesan = $this->Katering_Model->produk_where($id_pesan);
+            $data['total'] = $pesan['harga'] * $data['jumlah'];
+            $data['pelanggan'] = $this->session->userdata('id_pelanggan');
+            $this->Katering_Model->insert_keranjang($data);
             redirect('katering/pesanan');
         }
     }
@@ -138,7 +134,7 @@ class Katering extends CI_Controller
         $user = $this->session->userdata('id_pelanggan');
         $data['user'] = $this->Katering_Model->user_by_id($user);
         $data['produk'] = $this->Katering_Model->produk();
-        $data['detail'] = $this->session->userdata('daftar');
+        $data['detail'] = $this->Katering_Model->keranjang_where($user);
         $this->load->view('templates/header');
         $this->load->view('templates/topbar_f');
         $this->load->view('katering/pesanan', $data);
@@ -156,25 +152,39 @@ class Katering extends CI_Controller
             redirect('katering/pesanan');
         } else {
             $data = $this->input->post();
+            $nota = idate('d') . idate('m') . idate('Y') . random_string('alnum', 5);
             $date = $data['tanggal'];
             $waktu = $data['waktu'];
             $tanggal = date('Y-m-d H:i:s', strtotime("$date $waktu"));
             $user = $this->session->userdata('id_pelanggan');
+            $data['nota'] = $nota;
             $data['pelanggan'] =  $user;
             $data['antar'] = $tanggal;
             $this->Katering_Model->insert_pemmesanan($data);
-            $daftar = $this->session->userdata('daftar');
-            $nota = $this->Katering_Model->get_nota($user);
+            $daftar = $this->Katering_Model->keranjang_where($user);
             foreach ($daftar as $data_detail) {
-                $data_detail['nota'] = $nota['nota'];
-                $produk = $this->Katering_Model->produk_once($data_detail['pesan']);
-                $data_detail['total'] =  $produk['harga'] * $data_detail['jumlah'];
+                $data_detail['nota'] = $nota;
+                $produk = $this->Katering_Model->produk_once($data_detail['id_produk']);
+                $data_detail['total'] =  $produk['harga'] * $data_detail['jumlah_pesan'];
                 $this->Katering_Model->insert_daftar_pesan($data_detail);
             }
+            $this->Katering_Model->delete_keranjang($user);
+            $this->_invoice();
+            redirect('keranjang');
         }
     }
 
-    public function coba()
+    public function keranjang()
+    {
+        $id = $this->session->userdata('id_pelanggan');
+        $data['keranjang'] = $this->Katering_Model->transaksi_by_id($id);
+        $this->load->view('templates/header');
+        $this->load->view('templates/topbar_f');
+        $this->load->view('katering/keranjang', $data);
+        $this->load->view('templates/footer');
+    }
+
+    function _invoice()
     {
         $dompdf = new DOMPDF();
         $data = ['nama' => 'fahmy'];
@@ -182,7 +192,25 @@ class Katering extends CI_Controller
         $dompdf->load_html($html);
         $dompdf->set_paper('A4', 'landscape');
         $dompdf->render();
-        $pdf = $dompdf->output();
+        // $pdf = $dompdf->output();
         $dompdf->stream('invoice.pdf', ['Attachmment' => false]);
+    }
+
+    public function tampil()
+    {
+        // $dompdf = new DOMPDF();
+        $data = ['nama' => 'fahmy'];
+        $data['bank'] = [
+            'BCA' => '910212312',
+            'BRI' => '6162164216421821',
+            'BNI' => '2812198721189',
+            'Mandiri' => '12312312312'
+        ];
+        $this->load->view('laporan/invoice', $data);
+        // $dompdf->load_html($html);
+        // $dompdf->set_paper('A4', 'landscape');
+        // $dompdf->render();
+        // // $pdf = $dompdf->output();
+        // $dompdf->stream('invoice.pdf', ['Attachmment' => false]);
     }
 }

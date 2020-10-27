@@ -17,8 +17,10 @@ class Katering_Model extends CI_Model
     public function insert_pemmesanan($data)
     {
         $datas = [
+            'nota_pemesanan' => $data['nota'],
             'id_pelanggan' => $data['pelanggan'],
             'tgl_antar' => $data['antar'],
+            'gambar' => 'belum',
             'status_bayar' => 'belum',
             'status_antar' => 'belum'
         ];
@@ -27,15 +29,19 @@ class Katering_Model extends CI_Model
     public function insert_daftar_pesan($data)
     {
         $datas = [
-            'id_produk' => $data['pesan'],
+            'id_produk' => $data['id_produk'],
             'nota_produk' => $data['nota'],
             'total_harga' => $data['total'],
             'catatan' => $data['catatan'],
-            'jumlah_pesan' => $data['jumlah']
+            'jumlah_pesan' => $data['jumlah_pesan']
         ];
         $this->db->insert('tb_detail_produk', $datas);
     }
 
+    public function transaksi_by_id($id)
+    {
+        return $this->db->where('id_pelanggan', $id)->get('tb_pemesanan')->result_array();
+    }
     public function get_nota($id)
     {
         return $this->db->select("max(nota_pemesanan) as nota")->where('id_pelanggan', $id)->get('tb_pemesanan')->row_array();
@@ -58,5 +64,26 @@ class Katering_Model extends CI_Model
             'nm_pelanggan' => $data['nama'], 'alamat' => $data['alamat'], 'email' => $data['email'], 'no_hp' => $data['telpon'], 'password' => $data['pass2']
         ];
         $this->db->insert('tb_pelanggan', $datas);
+    }
+    public function insert_keranjang($data)
+    {
+        $datas = [
+            'id_keranjang' => random_string('numeric', 5),
+            'id_pelanggan' => $data['pelanggan'],
+            'id_produk' => $data['pesan'],
+            'jumlah_pesan' => $data['jumlah'],
+            'total_harga' => $data['total'],
+            'catatan' => $data['catatan']
+        ];
+        $this->db->insert('tb_keranjang', $datas);
+    }
+    public function keranjang_where($data)
+    {
+        return $this->db->where('id_pelanggan', $data)->get('tb_keranjang')->result_array();
+    }
+
+    public function delete_keranjang($data)
+    {
+        $this->db->where('id_pelanggan', $data)->delete('tb_keranjang');
     }
 }

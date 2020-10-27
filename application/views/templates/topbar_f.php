@@ -1,20 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Katering Ku</a>
+    <a class="navbar-brand" href="<?= base_url('katering') ?>">Katering Ku</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="<?= base_url('katering') ?>">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Keranjang</a>
-            </li>
-            <li class="nav-item dropdown">
-                <?php
-                $user = $this->session->userdata('id_pelanggan');
-                if ($user) { ?>
+
+            <?php
+            $user = $this->session->userdata('id_pelanggan');
+            if ($user) { ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url('katering/') ?>keranjang">Keranjang</a>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Logout
                     </a>
@@ -43,8 +44,10 @@
                             </div>
                         </div>
                     </div>
+                </li>
 
-                <?php } else { ?>
+            <?php } else { ?>
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Bergabung
                     </a>
@@ -135,10 +138,9 @@
                             </div>
                         </div>
                     </div>
-                <?php }
-                ?>
-
-            </li>
+                </li>
+            <?php }
+            ?>
         </ul>
     </div>
 </nav>

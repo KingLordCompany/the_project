@@ -9,20 +9,24 @@ class Admin extends CI_Controller
         parent::__construct();
         $this->load->model('Admin_Model');
     }
+
+    public function template()
+    {
+    }
     public function profile()
     {
         $data['judul'] = 'King Lord';
-        $this->load->view('templates/header');
-        $this->load->view('templates/topbar');
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
         $this->load->view('admin/profile', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('template_admin/footer');
     }
     public function index()
     {
-        $this->load->view('templates/header');
-        $this->load->view('templates/topbar');
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
         $this->load->view('admin/index');
-        $this->load->view('templates/footer');
+        $this->load->view('template_admin/footer');
     }
 
     // USER
@@ -30,10 +34,11 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'User';
         $data['admin'] = $this->Admin_Model->get_all();
-        $this->load->view('templates/header');
-        $this->load->view('templates/topbar');
+
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
         $this->load->view('admin/user', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('template_admin/footer');
     }
     public function insert_user()
     {
@@ -85,10 +90,11 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'Produk';
         $data['produk'] = $this->Admin_Model->get_all_produk();
-        $this->load->view('templates/header');
-        $this->load->view('templates/topbar');
+
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
         $this->load->view('admin/produk', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('template_admin/footer');
     }
     public function insert_produk()
     {

@@ -62,4 +62,20 @@ class Admin_Model extends CI_Model
         $this->db->where('id_produk', $id)->delete('tb_produk');
     }
     // END PRODUK
+
+    // TRANSAKSI
+    public function get_transaksi()
+    {
+        return $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_pemesanan.id_pelanggan')->get('tb_pemesanan')->result_array();
+    }
+    public function detail_where($data)
+    {
+        return $this->db->where('nota_produk', $data)->join('tb_produk', 'tb_produk.id_produk=tb_detail_produk.id_produk')->get('tb_detail_produk')->result_array();
+    }
+
+    public function total_harga($data)
+    {
+        return $this->db->select('sum(total_harga) as total')->where('nota_produk', $data)->get('tb_detail_produk')->row_array();
+    }
+    // END TRANSAKSI
 }

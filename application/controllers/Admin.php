@@ -243,4 +243,17 @@ class Admin extends CI_Controller
     // }
     // END USER
 
+    // TRANSAKSI
+    public function transaksi()
+    {
+        $data['judul'] = 'Transaksi';
+        $data['transaksi'] = $this->Admin_Model->get_transaksi();
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/transaksi', $data);
+        $this->load->view('template_admin/footer');
+    }
+
+    // END TRANSAKSI
+
 }

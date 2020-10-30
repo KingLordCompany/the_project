@@ -51,13 +51,16 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
+                                        <?= form_open('katering/hapus_pesanan') ?>
+                                        <input type="hidden" name="pesan" value="<?= $detail['id_keranjang'] ?>">
                                         <div class="modal-body">
                                             Apakah anda yakin ingin menghapus menu <?= $produk['nama_produk'] ?>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a href="" class="btn btn-danger">Hapus</a>
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
                                         </div>
+                                        <?= form_close() ?>
                                     </div>
                                 </div>
                             </div>
@@ -72,24 +75,24 @@
                             <div class="modal fade" id="Edit<?= $detail['id_keranjang'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <?= form_open() ?>
-                                        <input type="hidden" name="pesan">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
+                                        <?= form_open('katering/edit_pesanan') ?>
+                                        <input type="hidden" name="pesan" value="<?= $detail['id_keranjang'] ?>">
                                         <div class="modal-body">
                                             <label for="exampleInputEmail1">Menu <h5><?= $produk['nama_produk'] ?></h5></label>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Jumlah Pesanan</label>
-                                                <input type="email" class="form-control" min="<?= $produk['minimal_pesan'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Jumlah Pesanan">
+                                                <input type="number" class="form-control" name="jumlah" min="<?= $produk['minimal_pesan'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $detail['jumlah_pesan'] ?>" placeholder="Masukan Jumlah Pesanan">
                                                 <small id="emailHelp" class="form-text text-danger">Minimal pemesanan <?= $produk['minimal_pesan'] ?></small>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1">Catatan</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" name="catatan" rows="3"><?= $detail['catatan'] ?></textarea>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -97,7 +100,7 @@
                                             <button type="submit" class="btn btn-primary">Edit</button>
                                         </div>
                                         <?= form_close() ?>
-                                    </div>
+                                    </div>+
                                 </div>
                             </div>
 

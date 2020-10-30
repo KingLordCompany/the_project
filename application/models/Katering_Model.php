@@ -86,4 +86,24 @@ class Katering_Model extends CI_Model
     {
         $this->db->where('id_pelanggan', $data)->delete('tb_keranjang');
     }
+
+    public function edit_pesanan($data)
+    {
+        $id =  $data['pesan'];
+        $datas = [
+            'jumlah_pesan' => $data['jumlah'],
+            'catatan' => $data['catatan']
+        ];
+        $this->db->where('id_keranjang', $id)->update('tb_keranjang', $datas);
+    }
+
+    public function hapus_pesanan($data)
+    {
+        $this->db->where('id_keranjang', $data['pesan'])->delete('tb_keranjang');
+    }
+    public function upload_validation($data)
+    {
+        $datas = ['gambar' => $data['file']];
+        $this->db->where('nota_pemesanan', $data['transaksi'])->update('tb_pemesanan', $datas);
+    }
 }

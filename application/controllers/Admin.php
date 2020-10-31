@@ -8,6 +8,10 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Admin_Model');
+        $id = $this->session->userdata('id_admin');
+        if (empty($id)) {
+            redirect('katering');
+        }
     }
 
     public function template()

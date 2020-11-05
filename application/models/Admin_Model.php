@@ -77,5 +77,15 @@ class Admin_Model extends CI_Model
     {
         return $this->db->select('sum(total_harga) as total')->where('nota_produk', $data)->get('tb_detail_produk')->row_array();
     }
+
+    public function edit_status_transaksi($data)
+    {
+        $id = $data['transaksi'];
+        $datas = [
+            'status_bayar' => $data['bayar'],
+            'status_antar' => $data['antar']
+        ];
+        $this->db->where('nota_pemesanan', $id)->update('tb_pemesanan', $datas);
+    }
     // END TRANSAKSI
 }

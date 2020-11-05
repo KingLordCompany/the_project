@@ -1,6 +1,40 @@
 <div class="mx-5 mt-3 animated fadeIn delay-1s">
     <div class="jumbotron">
         <h1>Halaman <?= $judul ?></h1>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Cetak Laporan
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <?= form_open('admin/laporan') ?>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Dari</label>
+                            <input type="date" name="dari" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Sampai</label>
+                            <input type="date" name="sampai" class="form-control" id="exampleInputPassword1">
+                        </div>
+                    </div>
+                    <div class=" modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Cetak</button>
+                    </div>
+                    <?= form_close() ?>
+                </div>
+            </div>
+        </div>
         <div class="alert">
             <?= $this->session->flashdata('alert'); ?>
         </div>
@@ -37,7 +71,7 @@
                                 <td><?= $trans['tgl_antar'] ?></td>
                                 <td><?= $trans['status_antar'] ?></td>
                                 <td><?= $trans['status_bayar'] ?></td>
-                                <td><?= $trans['status_bayar'] ?></td>
+                                <td><?= $trans['status_antar'] ?></td>
                                 <td>Rp. <?= number_format($total['total']) ?></td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal<?= $trans['nota_pemesanan'] ?>">
@@ -76,8 +110,8 @@
                                                                     <td><?= $det_trans['nama_produk'] ?></td>
                                                                     <td><?= $det_trans['catatan'] ?></td>
                                                                     <td><?= $det_trans['jumlah_pesan'] ?></td>
-                                                                    <td><?= $det_trans['harga'] ?></td>
-                                                                    <td><?= $det_trans['total_harga'] ?></td>
+                                                                    <td>Rp. <?= number_format($det_trans['harga']) ?></td>
+                                                                    <td>Rp. <?= number_format($det_trans['total_harga']) ?></td>
                                                                 </tr>
                                                             <?php } ?>
                                                         </tbody>
@@ -85,7 +119,7 @@
                                                     <!-- END DETAIL -->
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+                                                    <button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,23 +140,30 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <?= form_open_multipart('admin/delete_produk') ?>
+                                                    <?= form_open_multipart('admin/edit_status_transaksi') ?>
+                                                    <input type="hidden" name="transaksi" value="<?= $trans['nota_pemesanan'] ?>">
                                                     <input type="hidden" class="form-control" id="namauser" name="produk" value="<?= $trans['nota_pemesanan'] ?>">
                                                     <div class="form-group">
-                                                        <label for="exampleFormControlSelect1">Status Bayar</label>
-                                                        <select class="form-control" id="exampleFormControlSelect1">
-                                                            <option>Belum</option>
-                                                            <option>Selesai</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlSelect1">Status Bayar</label>
+                                                            <select class="form-control" name="bayar" id="exampleFormControlSelect1">
+                                                                <?php foreach ($bayar as $key => $value) { ?>
+                                                                    <option value="<?= $value ?>" <?php if ($value == $trans['status_bayar']) {
+                                                                                                        echo 'selected';
+                                                                                                    } ?>><?= $key ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
                                                         <label for="exampleFormControlSelect1">Status Antar</label>
-                                                        <select class="form-control" id="exampleFormControlSelect1">
-                                                            <option>Belum</option>
-                                                            <option>DP</option>
-                                                            <option>Selesai</option>
+                                                        <select class="form-control" name="antar" id="exampleFormControlSelect1">
+                                                            <?php foreach ($antar as $key => $value) { ?>
+                                                                <option value="<?= $value ?>" <?php if ($value == $trans['status_antar']) {
+                                                                                                    echo 'selected';
+                                                                                                } ?>><?= $key ?></option>
+                                                            <?php } ?>
                                                         </select>
                                                     </div>
+
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

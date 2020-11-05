@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+}
+.title {
+    background-color: rgb(24, 24, 24);
+    color: white;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    text-align: center;
+    font-size: xx-large;
+}

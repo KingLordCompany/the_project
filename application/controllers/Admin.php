@@ -7,7 +7,12 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        require APPPATH . 'third_party/dompdf/dompdf_config.inc.php';
         $this->load->model('Admin_Model');
+        $id = $this->session->userdata('id_admin');
+        if (empty($id)) {
+            redirect('katering');
+        }
     }
 
     public function template()
@@ -242,5 +247,59 @@ class Admin extends CI_Controller
     //     # code...
     // }
     // END USER
+
+    // TRANSAKSI
+    public function transaksi()
+    {
+        $data['bayar'] = [
+            'Belum' => 'belum',
+            'DP' => 'dp',
+            'Lunas' => 'lunas'
+        ];
+        $data['antar'] = [
+            'Belum' => 'belum',
+            'Antar' => 'antar'
+        ];
+        $data['judul'] = 'Transaksi';
+        $data['transaksi'] = $this->Admin_Model->get_transaksi();
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/transaksi', $data);
+        $this->load->view('template_admin/footer');
+    }
+
+    public function edit_status_transaksi()
+    {
+        $this->form_validation->set_rules('bayar', 'Bayar', 'required');
+        $this->form_validation->set_rules('antar', 'Antar', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Data gagal diubah
+          </div>');
+            redirect('admin/transaksi');
+        } else {
+            $data = $this->input->post();
+            $this->Admin_Model->edit_status_transaksi($data);
+
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+                Data berhasil diubah
+              </div>');
+            redirect('admin/transaksi');
+        }
+    }
+
+    public function laporan()
+    {
+        $data = $this->input->post();
+        $data['laporan'] = $this->db->where('tgl_order >=', $data['dari'])->where('tgl_order <=', $data['sampai'])->get('tb_pemesanan')->result_array();
+        $dompdf = new DOMPDF();
+        $html = $this->load->view('laporan/laporan', $data, true);
+        $dompdf->load_html($html);
+        $dompdf->set_paper('A4', 'landscape');
+        $dompdf->render();
+        $pdf = $dompdf->output();
+        $dompdf->stream('laporan.pdf', ['Attachmment' => false]);
+    }
+    // END TRANSAKSI
 
 }

@@ -213,4 +213,76 @@ class Katering extends CI_Controller
         // // $pdf = $dompdf->output();
         // $dompdf->stream('invoice.pdf', ['Attachmment' => false]);
     }
+
+    public function hapus_pesanan()
+    {
+        $this->form_validation->set_rules('pesan', 'Pesan', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Gagal Menghapus Data
+          </div>');
+            redirect('katering/pesanan');
+        } else {
+            $data = $this->input->post();
+            $this->Katering_Model->hapus_pesanan($data);
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+            Berhasil Menghapus Data
+          </div>');
+            redirect('katering/pesanan');
+        }
+    }
+
+    public function edit_pesanan()
+    {
+        $this->form_validation->set_rules('pesan', 'Pesan', 'required');
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
+        $this->form_validation->set_rules('catatan', 'Catatn', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Gagal Mengubah Data
+          </div>');
+            redirect('katering/pesanan');
+        } else {
+            $data = $this->input->post();
+            $this->Katering_Model->edit_pesanan($data);
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+            Berhasil Mengubah Data
+          </div>');
+            redirect('katering/pesanan');
+        }
+    }
+    public function upload_validation()
+    {
+        $this->form_validation->set_rules('transaksi', 'Transaksi', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Gagal Mengubah Data
+          </div>');
+            redirect('katering/pesanan');
+        } else {
+            $data = $_FILES['file'];
+            if ($data) {
+                $config['upload_path']          = './assets/img/validation_img/';
+                $config['allowed_types']        = 'gif|jpg|png|jpeg';
+                $config['max_size']             = 2048;
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('file')) {
+                    $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+                Gagal Mengupload Data
+              </div>');
+                    redirect('katering/keranjang');
+                } else {
+                    $data['file'] = $this->upload->data('file_name');
+                    $data['transaksi'] = $this->input->post('transaksi');
+                    $this->Katering_Model->upload_validation($data);
+                    $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+                        Berhasil Mengupload Data
+                      </div>');
+                    redirect('katering/keranjang');
+                }
+            }
+        }
+    }
 }

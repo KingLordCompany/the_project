@@ -12,6 +12,7 @@
                     <th scope="col">Jumlah</th>
                     <th scope="col">Satuan</th>
                     <th scope="col">Total</th>
+                    <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +36,76 @@
                         <td><?= $qty ?></td>
                         <td>Rp. <?= number_format($satuan) ?></td>
                         <td>Rp. <?= number_format($satuan * $qty) ?></td>
+                        <td>
+                            <!-- Hapus -->
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapus<?= $detail['id_keranjang'] ?>">
+                                Hapus
+                            </button>
+                            <!-- Modal Hapus -->
+                            <div class="modal fade" id="hapus<?= $detail['id_keranjang'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <?= form_open('katering/hapus_pesanan') ?>
+                                        <input type="hidden" name="pesan" value="<?= $detail['id_keranjang'] ?>">
+                                        <div class="modal-body">
+                                            Apakah anda yakin ingin menghapus menu <?= $produk['nama_produk'] ?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </div>
+                                        <?= form_close() ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- end modal hapus -->
+
+                            <!-- Edit -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Edit<?= $detail['id_keranjang'] ?>">
+                                Edit
+                            </button>
+                            <!-- Modal Edit -->
+                            <div class="modal fade" id="Edit<?= $detail['id_keranjang'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <?= form_open('katering/edit_pesanan') ?>
+                                        <input type="hidden" name="pesan" value="<?= $detail['id_keranjang'] ?>">
+                                        <div class="modal-body">
+                                            <label for="exampleInputEmail1">Menu <h5><?= $produk['nama_produk'] ?></h5></label>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Jumlah Pesanan</label>
+                                                <input type="number" class="form-control" name="jumlah" min="<?= $produk['minimal_pesan'] ?>" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $detail['jumlah_pesan'] ?>" placeholder="Masukan Jumlah Pesanan">
+                                                <small id="emailHelp" class="form-text text-danger">Minimal pemesanan <?= $produk['minimal_pesan'] ?></small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Catatan</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" name="catatan" rows="3"><?= $detail['catatan'] ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Edit</button>
+                                        </div>
+                                        <?= form_close() ?>
+                                    </div>+
+                                </div>
+                            </div>
+
+                            <!-- end modal Edit -->
+                        </td>
                     </tr>
                 <?php } ?>
                 <tr>

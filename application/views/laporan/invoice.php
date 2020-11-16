@@ -1,10 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
-    <title>Document</title> -->
 <style>
     /* Style the header with a grey background and some padding */
     .header {
@@ -66,11 +59,6 @@
 <body>
     <div class="header">
         <div class="logo">KATERING KU</div>
-        <!-- <div class="header-right">
-            <a class="active" href="#home">Home</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
-        </div> -->
     </div>
 
     <div style="padding-left:20px">
@@ -88,13 +76,14 @@
                     </ol>
                 </li>
                 <li>Foto Atau Screenshot Bukti Tranfer via Bank</li>
-                <li>Buka menu keranjang <br> <img src="<?= base_url('assets/img/langkah_transfer/langkah1.png') ?>" alt="" srcset=""></li>
-                <li>Pilih pesanan yang sudah di tranfer <br> <img src="<?= base_url('assets/img/langkah_transfer/langkah2.png') ?>" alt="" srcset=""></li>
+                <li>Buka menu keranjang <br>
+                    <!-- <img src="<?= base_url('assets/img/langkah_transfer/langkah1.png') ?>" alt=""></li> -->
+                <li>Pilih pesanan yang sudah di tranfer
+                    <!-- <br> <img src="<?= base_url('assets/img/langkah_transfer/langkah2.png') ?>" alt=""> -->
+                </li>
                 </li>
                 <li>Lakukan validasi dengan mengirim bukti foto atau screenshot tranfer via bank</li>
             </h3>
         </ol>
     </div>
 </body>
-
-</html>

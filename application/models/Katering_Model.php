@@ -21,6 +21,7 @@ class Katering_Model extends CI_Model
             'id_pelanggan' => $data['pelanggan'],
             'tgl_antar' => $data['antar'],
             'gambar' => 'belum',
+            'tipe_bayar' => $data['bayar'],
             'status_bayar' => 'belum',
             'status_antar' => 'belum'
         ];

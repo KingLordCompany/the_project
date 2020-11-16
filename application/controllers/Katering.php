@@ -194,7 +194,7 @@ class Katering extends CI_Controller
         $dompdf->load_html($html);
         $dompdf->set_paper('A4', 'landscape');
         $dompdf->render();
-        // $pdf = $dompdf->output();
+        $pdf = $dompdf->output();
         $dompdf->stream('invoice.pdf', ['Attachmment' => false]);
     }
 

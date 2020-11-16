@@ -6,26 +6,20 @@
                 <li class="list-group-item active">Identitas Pengguna</li>
                 <li class="list-group-item">
                     <div class="form-group">
-                        <label for="namauser">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="namauser" name="nama" aria-describedby="emailHelp" value="King Lord" placeholder="Masukan Nama Lengkap">
+                        <label for="namauser">Username</label>
+                        <input type="text" class="form-control" id="namauser" name="nama" aria-describedby="emailHelp" value="<?= $admin['username'] ?>" placeholder="Masukan Nama Lengkap">
                     </div>
                 </li>
                 <li class="list-group-item">
                     <div class="form-group">
                         <label for="emailuser">Email</label>
-                        <input type="email" class="form-control" id="emailuser" name="user" aria-describedby="emailHelp" value="KingLord@Strong.com" placeholder="Masukan Email">
+                        <input type="email" class="form-control" id="emailuser" name="user" aria-describedby="emailHelp" value="<?= $admin['email'] ?>" placeholder="Masukan Email">
                     </div>
                 </li>
                 <li class="list-group-item">
                     <div class="form-group">
                         <label for="telpon">Telpon</label>
-                        <input type="tel" class="form-control" id="telpon" name="telpon" aria-describedby="emailHelp" value="085452572656" placeholder="Masukan Telpon">
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="form-group">
-                        <label for="alamatuser">Alamat</label>
-                        <textarea class="form-control" id="alamatuser" name="alamat" rows="3" placeholder="Masukan Alamat">Istana Megah</textarea>
+                        <input type="tel" class="form-control" id="telpon" name="telpon" aria-describedby="emailHelp" value="<?= $admin['no_hp'] ?>" placeholder="Masukan Telpon">
                     </div>
                 </li>
                 <li class="list-group-item">

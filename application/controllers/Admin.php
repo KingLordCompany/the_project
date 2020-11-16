@@ -20,7 +20,10 @@ class Admin extends CI_Controller
     }
     public function profile()
     {
-        $data['judul'] = 'King Lord';
+        $user = $this->session->userdata('id_admin');
+        $admin = $this->Admin_Model->admin_where($user);
+        $data['judul'] = $admin['username'];
+        $data['admin'] = $admin;
         $this->load->view('template_admin/header');
         $this->load->view('template_admin/sidebar');
         $this->load->view('admin/profile', $data);
@@ -247,6 +250,16 @@ class Admin extends CI_Controller
     //     # code...
     // }
     // END USER
+
+    // BAYAR
+    // public function bayar()
+    // {
+    //     $this->load->view('template_admin/header');
+    //     $this->load->view('template_admin/sidebar');
+    //     $this->load->view('admin/transaksi', $data);
+    //     $this->load->view('template_admin/footer');
+    // }
+    // END BAYAR
 
     // TRANSAKSI
     public function transaksi()

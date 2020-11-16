@@ -3,6 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin_Model extends CI_Model
 {
     // USER
+    public function admin_where($data)
+    {
+        return $this->db->where('id_admin', $data)->get('tb_admin')->row_array();
+    }
     public function get_all()
     {
         return $this->db->get('tb_admin')->result_array();

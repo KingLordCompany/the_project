@@ -135,6 +135,7 @@ class Katering extends CI_Controller
         $data['user'] = $this->Katering_Model->user_by_id($user);
         $data['produk'] = $this->Katering_Model->produk();
         $data['detail'] = $this->Katering_Model->keranjang_where($user);
+        $data['bayar'] = $this->Katering_Model->get_all_bayar();
         $this->load->view('templates/header');
         $this->load->view('templates/topbar_f');
         $this->load->view('katering/pesanan', $data);
@@ -188,11 +189,12 @@ class Katering extends CI_Controller
     {
         $dompdf = new DOMPDF();
         $data = ['nama' => 'fahmy'];
+        $data['bank'] = $this->Katering_Model->get_all_bayar();
         $html = $this->load->view('laporan/invoice', $data, true);
         $dompdf->load_html($html);
         $dompdf->set_paper('A4', 'landscape');
         $dompdf->render();
-        // $pdf = $dompdf->output();
+        $pdf = $dompdf->output();
         $dompdf->stream('invoice.pdf', ['Attachmment' => false]);
     }
 
@@ -200,12 +202,7 @@ class Katering extends CI_Controller
     {
         // $dompdf = new DOMPDF();
         $data = ['nama' => 'fahmy'];
-        $data['bank'] = [
-            'BCA' => '910212312',
-            'BRI' => '6162164216421821',
-            'BNI' => '2812198721189',
-            'Mandiri' => '12312312312'
-        ];
+        $data['bank'] = $this->Katering_Model->get_all_bayar();
         $this->load->view('laporan/invoice', $data);
         // $dompdf->load_html($html);
         // $dompdf->set_paper('A4', 'landscape');
@@ -284,5 +281,10 @@ class Katering extends CI_Controller
                 }
             }
         }
+    }
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('katering');
     }
 }

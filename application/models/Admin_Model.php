@@ -3,9 +3,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin_Model extends CI_Model
 {
     // USER
+    public function admin_where($data)
+    {
+        return $this->db->where('id_admin', $data)->get('tb_admin')->row_array();
+    }
     public function get_all()
     {
         return $this->db->get('tb_admin')->result_array();
+    }
+    public function change_pass($data)
+    {
+        $id = $data['id'];
+        $datas = ['password' => $data['pass1']];
+        $this->db->where('id_admin', $id)->update('tb_admin', $datas);
     }
 
     public function insert_user($data)
@@ -88,4 +98,29 @@ class Admin_Model extends CI_Model
         $this->db->where('nota_pemesanan', $id)->update('tb_pemesanan', $datas);
     }
     // END TRANSAKSI
+
+    // BAYAR
+    public function get_all_bayar()
+    {
+        return $this->db->get('tb_bayar')->result_array();
+    }
+
+    public function insert_bayar($data)
+    {
+        $datas = ['tipe_bayar' => $data['bayar'], 'nama_rekening' => $data['nama'], 'no_rekening' => $data['no']];
+        $this->db->insert('tb_bayar', $datas);
+    }
+
+    public function update_bayar($data)
+    {
+        $id = $data['id'];
+        $datas = ['tipe_bayar' => $data['bayar'], 'nama_rekening' => $data['nama'], 'no_rekening' => $data['no']];
+        $this->db->where('tipe_bayar', $id)->update('tb_bayar', $datas);
+    }
+    public function delete_bayar($data)
+    {
+        $id = $data['id'];
+        $this->db->where('tipe_bayar', $id)->delete('tb_bayar');
+    }
+    // END BAYAR
 }

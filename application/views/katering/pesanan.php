@@ -140,10 +140,19 @@
                 Total : <h4>Rp. <?= number_format($total) ?></h4>
                 <hr>
                 <label for="exampleFormControlInput1">Tanggal dan Waktu pengiriman</label>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Pembayaran</label>
+                    <select class="form-control" name="bayar" id="exampleFormControlSelect1">
+                        <?php foreach ($bayar as $bayar) { ?>
+                            <option value="<?= $bayar['tipe_bayar'] ?>"><?= $bayar['tipe_bayar'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
                 <div class="form-row">
                     <div class="col">
                         <input type="date" name="tanggal" class="form-control" min="<?= $tanggal ?>">
                     </div>
+
                     <div class="col">
                         <input type="time" name="waktu" class="form-control">
                     </div>

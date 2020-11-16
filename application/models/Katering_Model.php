@@ -106,4 +106,8 @@ class Katering_Model extends CI_Model
         $datas = ['gambar' => $data['file']];
         $this->db->where('nota_pemesanan', $data['transaksi'])->update('tb_pemesanan', $datas);
     }
+    public function get_all_bayar()
+    {
+        return $this->db->get('tb_bayar')->result_array();
+    }
 }

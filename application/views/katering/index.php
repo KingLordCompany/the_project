@@ -1,9 +1,8 @@
 <div class="container mt-3">
     <div class="jumbotron">
         <h1 class="display-4">Pesan sekarang di, Kateringku</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <p class="lead">Melayani pemesanan ketering dengan praktis dan mudah</p>
         <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
 
         <?= $this->session->flashdata('alert'); ?>
     </div>

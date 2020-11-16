@@ -228,6 +228,80 @@ class Admin extends CI_Controller
     }
     // END USER
 
+    // BANK
+
+    // END BANK
+    public function bayar()
+    {
+        $data['judul'] = 'Bayar';
+        $data['produk'] = $this->Admin_Model->get_all_bayar();
+
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/bank', $data);
+        $this->load->view('template_admin/footer');
+    }
+
+    public function insert_bayar()
+    {
+        $this->form_validation->set_rules('bayar', 'Bayar', 'required');
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('no', 'Nomor', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Data gagal dimasukan
+          </div>');
+            redirect('admin/bayar');
+        } else {
+            $data = $this->input->post();
+            $this->Admin_Model->insert_bayar($data);
+
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+                Data berhasil dimasukan
+              </div>');
+            redirect('admin/bayar');
+        }
+    }
+
+    public function update_bayar()
+    {
+        $this->form_validation->set_rules('bayar', 'Bayar', 'required');
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('no', 'Nomor', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Data gagal dimasukan
+          </div>');
+            redirect('admin/bayar');
+        } else {
+            $data = $this->input->post();
+            $this->Admin_Model->update_bayar($data);
+
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+                Data berhasil dimasukan
+              </div>');
+            redirect('admin/bayar');
+        }
+    }
+
+    public function delete_bayar()
+    {
+        $this->form_validation->set_rules('id', 'Bayar', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Data gagal dimasukan
+          </div>');
+            redirect('admin/bayar');
+        } else {
+            $data = $this->input->post();
+            $this->Admin_Model->delete_bayar($data);
+
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+                Data berhasil dimasukan
+              </div>');
+            redirect('admin/bayar');
+        }
+    }
 
     // END USER
 

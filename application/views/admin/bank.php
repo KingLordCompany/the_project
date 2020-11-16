@@ -13,7 +13,10 @@
                 Tabel <?= $judul ?>
             </div>
             <div class="card-body">
-                <table class="table">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search" aria-describedby="emailHelp" placeholder="silahkan ketik">
+                </div>
+                <table class="table" id="the_table">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">No</th>

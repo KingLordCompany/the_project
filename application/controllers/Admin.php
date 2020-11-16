@@ -29,6 +29,25 @@ class Admin extends CI_Controller
         $this->load->view('admin/profile', $data);
         $this->load->view('template_admin/footer');
     }
+    public function change_pass()
+    {
+        $this->form_validation->set_rules('pass1', 'Password', 'required');
+        $this->form_validation->set_rules('pass2', 'Confirm pass', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Data gagal diubah
+          </div>');
+            redirect('admin/profile');
+        } else {
+            $data = $this->input->post();
+            $this->Admin_Model->change_pass($data);
+
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+                Data berhasil diubah
+              </div>');
+            redirect('admin/profile');
+        }
+    }
     public function index()
     {
         $this->load->view('template_admin/header');

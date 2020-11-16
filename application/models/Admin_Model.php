@@ -11,6 +11,12 @@ class Admin_Model extends CI_Model
     {
         return $this->db->get('tb_admin')->result_array();
     }
+    public function change_pass($data)
+    {
+        $id = $data['id'];
+        $datas = ['password' => $data['pass1']];
+        $this->db->where('id_admin', $id)->update('tb_admin', $datas);
+    }
 
     public function insert_user($data)
     {

@@ -170,7 +170,7 @@ class Katering extends CI_Controller
                 $this->Katering_Model->insert_daftar_pesan($data_detail);
             }
             $this->Katering_Model->delete_keranjang($user);
-            $this->_invoice();
+            // $this->_invoice();
             redirect('keranjang');
         }
     }

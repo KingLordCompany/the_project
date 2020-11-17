@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Okt 2020 pada 01.01
+-- Waktu pembuatan: 17 Nov 2020 pada 13.33
 -- Versi server: 10.1.30-MariaDB
 -- Versi PHP: 7.2.2
 
@@ -36,6 +36,33 @@ CREATE TABLE `tb_admin` (
   `password` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tb_admin`
+--
+
+INSERT INTO `tb_admin` (`id_admin`, `username`, `email`, `no_hp`, `password`) VALUES
+(1, 'muhammad_fahmy', 'user@user.com', '085741852963', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_bayar`
+--
+
+CREATE TABLE `tb_bayar` (
+  `tipe_bayar` varchar(20) NOT NULL,
+  `nama_rekening` varchar(20) NOT NULL,
+  `no_rekening` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_bayar`
+--
+
+INSERT INTO `tb_bayar` (`tipe_bayar`, `nama_rekening`, `no_rekening`) VALUES
+('BCA', 'dimas', '87825423'),
+('BNI', 'Fiddy', '9477543');
+
 -- --------------------------------------------------------
 
 --
@@ -57,7 +84,12 @@ CREATE TABLE `tb_detail_produk` (
 
 INSERT INTO `tb_detail_produk` (`id_detail`, `id_produk`, `nota_produk`, `total_harga`, `catatan`, `jumlah_pesan`) VALUES
 (9, 2, '27102020m3Or4', 360000, 'telornya tanpa kuningnya', 30),
-(10, 3, '27102020m3Or4', 390000, 'ayamnya dada semua', 30);
+(10, 3, '27102020m3Or4', 390000, 'ayamnya dada semua', 30),
+(11, 5, '16112020TG2Pw', 400000, 'satenya klatak yak', 40),
+(12, 2, '16112020TG2Pw', 480000, 'murah ajah', 40),
+(13, 2, '16112020fmIhv', 360000, 'dada ayam', 30),
+(14, 2, '16112020liYg3', 360000, 'dada ayam', 30),
+(15, 2, '16112020LwWRz', 360000, 'dada ayam', 30);
 
 -- --------------------------------------------------------
 
@@ -73,14 +105,6 @@ CREATE TABLE `tb_keranjang` (
   `total_harga` int(11) NOT NULL,
   `catatan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tb_keranjang`
---
-
-INSERT INTO `tb_keranjang` (`id_keranjang`, `id_pelanggan`, `id_produk`, `jumlah_pesan`, `total_harga`, `catatan`) VALUES
-(57416, 1, 5, 40, 400000, 'satenya klatak yak'),
-(86975, 1, 2, 40, 480000, 'murah ajah');
 
 -- --------------------------------------------------------
 
@@ -113,6 +137,7 @@ INSERT INTO `tb_pelanggan` (`id_pelanggan`, `nm_pelanggan`, `alamat`, `email`, `
 
 CREATE TABLE `tb_pemesanan` (
   `nota_pemesanan` varchar(20) NOT NULL,
+  `tipe_bayar` varchar(20) NOT NULL,
   `id_pelanggan` int(11) NOT NULL,
   `tgl_order` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `tgl_antar` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
@@ -125,8 +150,12 @@ CREATE TABLE `tb_pemesanan` (
 -- Dumping data untuk tabel `tb_pemesanan`
 --
 
-INSERT INTO `tb_pemesanan` (`nota_pemesanan`, `id_pelanggan`, `tgl_order`, `tgl_antar`, `gambar`, `status_bayar`, `status_antar`) VALUES
-('27102020m3Or4', 1, '2020-10-27 18:14:44', '2020-10-28 18:17:00', 'belum', 'belum', 'belum');
+INSERT INTO `tb_pemesanan` (`nota_pemesanan`, `tipe_bayar`, `id_pelanggan`, `tgl_order`, `tgl_antar`, `gambar`, `status_bayar`, `status_antar`) VALUES
+('16112020fmIhv', 'BCA', 1, '2020-11-16 17:03:33', '2020-12-04 17:06:00', 'belum', 'belum', 'belum'),
+('16112020liYg3', 'BCA', 1, '2020-11-16 17:07:39', '2020-11-20 17:09:00', 'belum', 'belum', 'belum'),
+('16112020LwWRz', 'BCA', 1, '2020-11-16 17:09:08', '2020-11-24 21:09:00', 'belum', 'belum', 'belum'),
+('16112020TG2Pw', 'BCA', 1, '2020-11-16 17:02:35', '2020-11-19 17:06:00', 'belum', 'belum', 'belum'),
+('27102020m3Or4', '', 1, '2020-10-27 18:14:44', '2020-11-16 16:36:43', 'download.jpg', 'belum', 'belum');
 
 -- --------------------------------------------------------
 
@@ -162,6 +191,12 @@ INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `harga`, `minimal_pesan`, `
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Indeks untuk tabel `tb_bayar`
+--
+ALTER TABLE `tb_bayar`
+  ADD PRIMARY KEY (`tipe_bayar`);
 
 --
 -- Indeks untuk tabel `tb_detail_produk`
@@ -204,13 +239,13 @@ ALTER TABLE `tb_produk`
 -- AUTO_INCREMENT untuk tabel `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_detail_produk`
 --
 ALTER TABLE `tb_detail_produk`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pelanggan`

@@ -32,18 +32,17 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Data Master</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?= base_url('admin/user') ?>">User</a>
-                    <a class="collapse-item" href="<?= base_url('admin/produk') ?>">Produk</a>
-                    <a class="collapse-item" href="<?= base_url('admin/bayar') ?>">Bayar</a>
-                </div>
-            </div>
+        <li class="nav-item active">
+            <a class="nav-link " href="<?= base_url('admin/user') ?>"> <i class="fas fa-fw fa-user"></i>
+                <span>User</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="<?= base_url('admin/produk') ?>"><i class="fas fa-fw fa-list"></i>
+                <span>Poduk</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="<?= base_url('admin/bayar') ?>"><i class="fas fa-fw fa-wallet"></i>
+                <span>Bayar</span></a>
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -51,8 +50,8 @@
             Transaksi
         </div>
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/transaksi') ?>">
+        <li class="nav-item active">
+            <a class="nav-link v" href="<?= base_url('admin/transaksi') ?>">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Transaksi</span></a>
         </li>

@@ -1,10 +1,10 @@
 <div class="container mt-3">
     <div class="jumbotron">
-        <h1 class="display-4">Daftar Checkout</h1>
+        <h1 class="display-4">Daftar Pesanan</h1>
         <hr class="my-4">
         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <thead class="bg-primary text-white">
-                <tr rowspa>
+                <tr>
                     <th class="th-sm">Tanggal Pesan</th>
                     <th class="th-sm">Bank</th>
                     <th class="th-sm">Status Bayar</th>
@@ -84,12 +84,14 @@
                     </tr>
                 <?php } ?>
             </tbody>
-            <tfoot>
+            <tfoot class="bg-primary text-white">
                 <tr>
-                    <td>Tanggal Pesan</td>
-                    <td>Status Bayar</td>
-                    <td>Status Antar</td>
-                    <td>Aksi</td>
+                    <th class="th-sm">Tanggal Pesan</th>
+                    <th class="th-sm">Bank</th>
+                    <th class="th-sm">Status Bayar</th>
+                    <th class="th-sm">Status Antar</th>
+                    <th class="th-sm">Struk</th>
+                    <th class="th-sm">Validasi Pembayaran</th>
                 </tr>
             </tfoot>
         </table>

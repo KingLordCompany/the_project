@@ -27,7 +27,7 @@ class Login extends CI_Controller
             $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
             Data gagal dimasukan
           </div>');
-            redirect('login/login');
+            redirect('login');
         } else {
             $data = $this->input->post();
             $check = $this->Login_Model->check_login($data);
@@ -39,13 +39,13 @@ class Login extends CI_Controller
                     $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
                     Data gagal dimasukan
                   </div>');
-                    redirect('login/login');
+                    redirect('login');
                 }
             } else {
                 $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
                 Data gagal dimasukan
               </div>');
-                redirect('login/login');
+                redirect('login');
             }
         }
     }

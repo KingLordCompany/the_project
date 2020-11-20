@@ -1,6 +1,6 @@
 <div class="container mt-3">
     <div class="jumbotron">
-        <h1 class="display-4">Daftar Pesanan</h1>
+        <h1 class="display-4">Daftar Keranjang</h1>
         <?= $this->session->flashdata('alert'); ?>
         <hr class="my-4">
         <table class="table">

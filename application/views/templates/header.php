@@ -7,7 +7,9 @@
     <title>Katering</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/fontawesome/css/all.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/datatable/css/datatables.min.css') ?>">
+    <!-- <link rel="stylesheet" href="<?= base_url('assets/datatable/css/datatables2.min.css') ?>"> -->
+    <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"> -->
 </head>
 
 <body>
- 

@@ -230,7 +230,7 @@ class Admin extends CI_Controller
 
     // BANK
 
-    // END BANK
+
     public function bayar()
     {
         $data['judul'] = 'Bayar';
@@ -302,6 +302,8 @@ class Admin extends CI_Controller
             redirect('admin/bayar');
         }
     }
+
+    // END BANK
 
     // END USER
 

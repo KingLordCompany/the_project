@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Nov 2020 pada 13.33
+-- Waktu pembuatan: 21 Nov 2020 pada 07.05
 -- Versi server: 10.1.30-MariaDB
 -- Versi PHP: 7.2.2
 
@@ -83,8 +83,6 @@ CREATE TABLE `tb_detail_produk` (
 --
 
 INSERT INTO `tb_detail_produk` (`id_detail`, `id_produk`, `nota_produk`, `total_harga`, `catatan`, `jumlah_pesan`) VALUES
-(9, 2, '27102020m3Or4', 360000, 'telornya tanpa kuningnya', 30),
-(10, 3, '27102020m3Or4', 390000, 'ayamnya dada semua', 30),
 (11, 5, '16112020TG2Pw', 400000, 'satenya klatak yak', 40),
 (12, 2, '16112020TG2Pw', 480000, 'murah ajah', 40),
 (13, 2, '16112020fmIhv', 360000, 'dada ayam', 30),
@@ -105,6 +103,13 @@ CREATE TABLE `tb_keranjang` (
   `total_harga` int(11) NOT NULL,
   `catatan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_keranjang`
+--
+
+INSERT INTO `tb_keranjang` (`id_keranjang`, `id_pelanggan`, `id_produk`, `jumlah_pesan`, `total_harga`, `catatan`) VALUES
+(48175, 1, 2, 15, 180000, 'fdsfdfddfdfdfdfdfdfdf');
 
 -- --------------------------------------------------------
 
@@ -151,11 +156,10 @@ CREATE TABLE `tb_pemesanan` (
 --
 
 INSERT INTO `tb_pemesanan` (`nota_pemesanan`, `tipe_bayar`, `id_pelanggan`, `tgl_order`, `tgl_antar`, `gambar`, `status_bayar`, `status_antar`) VALUES
-('16112020fmIhv', 'BCA', 1, '2020-11-16 17:03:33', '2020-12-04 17:06:00', 'belum', 'belum', 'belum'),
+('16112020fmIhv', 'BCA', 1, '2020-11-16 17:03:33', '2020-11-21 11:51:49', 'download.jpg', 'lunas', 'selesai'),
 ('16112020liYg3', 'BCA', 1, '2020-11-16 17:07:39', '2020-11-20 17:09:00', 'belum', 'belum', 'belum'),
 ('16112020LwWRz', 'BCA', 1, '2020-11-16 17:09:08', '2020-11-24 21:09:00', 'belum', 'belum', 'belum'),
-('16112020TG2Pw', 'BCA', 1, '2020-11-16 17:02:35', '2020-11-19 17:06:00', 'belum', 'belum', 'belum'),
-('27102020m3Or4', '', 1, '2020-10-27 18:14:44', '2020-11-16 16:36:43', 'download.jpg', 'belum', 'belum');
+('16112020TG2Pw', 'BCA', 1, '2020-11-16 17:02:35', '2020-11-19 17:06:00', 'belum', 'belum', 'belum');
 
 -- --------------------------------------------------------
 

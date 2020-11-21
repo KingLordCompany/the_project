@@ -15,10 +15,14 @@
             </thead>
             <tbody>
                 <?php
-                foreach ($keranjang as $keranjang) { ?>
+                foreach ($keranjang as $keranjang) {
+                    $bank = $this->db->where('tipe_bayar', $keranjang['tipe_bayar'])->get('tb_bayar')->row_array();
+                    $tanggal = date_create($keranjang['tgl_order']);
+                    $date = date_format($tanggal, 'd-m-Y');
+                ?>
                     <tr>
-                        <td><?= $keranjang['tgl_order'] ?></td>
-                        <td><?= $keranjang['tipe_bayar'] ?></td>
+                        <td><?= $date ?></td>
+                        <td><?= $bank['tipe_bayar'] . ' ( ' . $bank['no_rekening'] . ' ) ' . ' A/N ' . $bank['nama_rekening']  ?></td>
                         <td><?= $keranjang['status_bayar'] ?></td>
                         <td><?= $keranjang['status_antar'] ?></td>
                         <td>
@@ -47,39 +51,44 @@
                             <?php } ?>
                         </td>
                         <td>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#keranjang<?= $keranjang['nota_pemesanan'] ?>">Validasi Pembayaran</button>
-                            <!-- validation -->
-                            <div class="modal fade" id="keranjang<?= $keranjang['nota_pemesanan'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Validasi Transaksi</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <?= form_open_multipart('katering/upload_validation') ?>
-                                        <input type="hidden" name="transaksi" value="<?= $keranjang['nota_pemesanan'] ?>">
-                                        <div class="modal-body  img-validation">
-                                            <label for="exampleInputEmail1">Upload Bukti Transfer</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">Upload</span>
-                                                </div>
-                                                <div class="custom-file">
-                                                    <input type="file" name="file" require accept="image/gif,image/jpg,image/png,image/jpeg" class="custom-file-input file-upload" id="inputGroupFile01 file-upload">
-                                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            <?php if ($keranjang['status_bayar'] == 'belum') { ?>
+
+                                <button class="btn btn-success" data-toggle="modal" data-target="#keranjang<?= $keranjang['nota_pemesanan'] ?>">Validasi Pembayaran</button>
+                                <!-- validation -->
+                                <div class="modal fade" id="keranjang<?= $keranjang['nota_pemesanan'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Validasi Transaksi</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <?= form_open_multipart('katering/upload_validation') ?>
+                                            <input type="hidden" name="transaksi" value="<?= $keranjang['nota_pemesanan'] ?>">
+                                            <div class="modal-body  img-validation">
+                                                <label for="exampleInputEmail1">Upload Bukti Transfer</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Upload</span>
+                                                    </div>
+                                                    <div class="custom-file">
+                                                        <input type="file" name="file" require accept="image/gif,image/jpg,image/png,image/jpeg" class="custom-file-input file-upload" id="inputGroupFile01 file-upload">
+                                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-success btn-upload">Upload</button>
+                                            </div>
+                                            <?= form_close() ?>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success btn-upload">Upload</button>
-                                        </div>
-                                        <?= form_close() ?>
                                     </div>
                                 </div>
-                            </div>
+                            <?php } else {
+                                echo ' Selesai';
+                            } ?>
                         </td>
                     </tr>
                 <?php } ?>

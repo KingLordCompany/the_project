@@ -13,10 +13,10 @@
             $user = $this->session->userdata('id_pelanggan');
             if ($user) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('katering/') ?>keranjang">Keranjang</a>
+                    <a class="nav-link" href="<?= base_url('katering/') ?>keranjang">Checkout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('katering/') ?>pesanan">Pesanan</a>
+                    <a class="nav-link" href="<?= base_url('katering/') ?>pesanan">Keranjang</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

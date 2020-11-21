@@ -115,7 +115,7 @@
             </tbody>
         </table>
         <div class="d-flex justify-content-between">
-            <a href="<?= base_url('katering') ?>" class="btn btn-primary">Pemesanan</a>
+            <a href="<?= base_url('katering') ?>" class="btn btn-primary">Tambah Pemesanan <i class=" fa-fw fas fa-cart-plus"></i></a>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Bayar Pesanan <i class="fas fa-money-bill-wave"></i>
             </button>
         </div>
@@ -139,15 +139,16 @@
                 <h6><?= $user['nm_pelanggan'] ?></h6>
                 Total : <h4>Rp. <?= number_format($total) ?></h4>
                 <hr>
-                <label for="exampleFormControlInput1">Tanggal dan Waktu pengiriman</label>
+
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Pembayaran</label>
                     <select class="form-control" name="bayar" id="exampleFormControlSelect1">
                         <?php foreach ($bayar as $bayar) { ?>
-                            <option value="<?= $bayar['tipe_bayar'] ?>"><?= $bayar['tipe_bayar'] ?></option>
+                            <option value="<?= $bayar['tipe_bayar'] ?>"><?= $bayar['tipe_bayar'] . ' ( ' . $bayar['no_rekening'] . ' ) ' . ' A/N ' . $bayar['nama_rekening'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
+                <label for="exampleFormControlInput1">Tanggal dan Waktu pengiriman</label>
                 <div class="form-row">
                     <div class="col">
                         <input type="date" name="tanggal" class="form-control" min="<?= $tanggal ?>">

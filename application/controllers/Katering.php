@@ -171,7 +171,7 @@ class Katering extends CI_Controller
             }
             $this->Katering_Model->delete_keranjang($user);
             // $this->_invoice();
-            redirect('keranjang');
+            redirect('katering/keranjang');
         }
     }
 

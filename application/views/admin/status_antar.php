@@ -53,9 +53,7 @@
                             <th scope="col">Nama Pelanggan</th>
                             <th scope="col">Tanggal Pesan</th>
                             <th scope="col">Tanggal Kirim</th>
-                            <th scope="col">Status Bayar</th>
                             <th scope="col">Status Antar</th>
-                            <th scope="col">Nota</th>
                             <th scope="col">Total</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -73,32 +71,6 @@
                                 <td><?= $trans['tgl_order'] ?></td>
                                 <td><?= $trans['tgl_antar'] ?></td>
                                 <td><?= $trans['status_antar'] ?></td>
-                                <td><?= $trans['status_bayar'] ?></td>
-                                <td>
-                                    <?php if ($trans['gambar'] == 'belum') { ?>
-                                        <p>belum</p>
-                                    <?php } else { ?>
-                                        <img src="<?= base_url('assets/img/validation_img/' . $trans['gambar']) ?>" alt="<?= $trans['gambar'] ?>" width="50" height="50" data-toggle="modal" data-target="#struk<?= $trans['nota_pemesanan'] ?>">
-                                        <div class="modal fade" id="struk<?= $trans['nota_pemesanan'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Struk</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <img class="mx-auto w-100" src="<?= base_url('assets/img/validation_img/' . $trans['gambar']) ?>" alt="<?= $trans['gambar'] ?>">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
-                                </td>
                                 <td>Rp. <?= number_format($total['total']) ?></td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal<?= $trans['nota_pemesanan'] ?>">
@@ -151,56 +123,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- End Modal Edit -->
-
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletemodal<?= $trans['nota_pemesanan'] ?>">
-                                        Edit Status
-                                    </button>
-                                    <!-- Modal Delete -->
-                                    <div class="modal fade" id="deletemodal<?= $trans['nota_pemesanan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Status <?= $judul ?></h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <?= form_open_multipart('admin/edit_status_transaksi') ?>
-                                                    <input type="hidden" name="transaksi" value="<?= $trans['nota_pemesanan'] ?>">
-                                                    <input type="hidden" class="form-control" id="namauser" name="produk" value="<?= $trans['nota_pemesanan'] ?>">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlSelect1">Status Bayar</label>
-                                                            <select class="form-control" name="bayar" id="exampleFormControlSelect1">
-                                                                <?php foreach ($bayar as $key => $value) { ?>
-                                                                    <option value="<?= $value ?>" <?php if ($value == $trans['status_bayar']) {
-                                                                                                        echo 'selected';
-                                                                                                    } ?>><?= $key ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                        <label for="exampleFormControlSelect1">Status Antar</label>
-                                                        <select class="form-control" name="antar" id="exampleFormControlSelect1">
-                                                            <?php foreach ($antar as $key => $value) { ?>
-                                                                <option value="<?= $value ?>" <?php if ($value == $trans['status_antar']) {
-                                                                                                    echo 'selected';
-                                                                                                } ?>><?= $key ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-danger">Ubah</button>
-                                                </div>
-                                                <?= form_close() ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Modal Delete -->
                                 </td>
                             </tr>
                         <?php } ?>

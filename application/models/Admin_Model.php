@@ -73,11 +73,26 @@ class Admin_Model extends CI_Model
     }
     // END PRODUK
 
+    // STATUS BAYAR
+    public function get_status_bayar()
+    {
+        return $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_pemesanan.id_pelanggan')->where('status_bayar', 'dp')->or_where('status_bayar', 'lunas')->get('tb_pemesanan')->result_array();
+    }
+    // END STATUS bAYAR
+
+    // STATUS ANTAR
+    public function get_status_antar()
+    {
+        return $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_pemesanan.id_pelanggan')->where('status_antar', 'selesai')->get('tb_pemesanan')->result_array();
+    }
+    // END STATUS ANTAR
+
     // TRANSAKSI
     public function get_transaksi()
     {
         return $this->db->join('tb_pelanggan', 'tb_pelanggan.id_pelanggan = tb_pemesanan.id_pelanggan')->get('tb_pemesanan')->result_array();
     }
+
     public function detail_where($data)
     {
         return $this->db->where('nota_produk', $data)->join('tb_produk', 'tb_produk.id_produk=tb_detail_produk.id_produk')->get('tb_detail_produk')->result_array();

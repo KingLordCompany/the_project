@@ -52,10 +52,19 @@
         <!-- Nav Item - Charts -->
         <li class="nav-item active">
             <a class="nav-link v" href="<?= base_url('admin/transaksi') ?>">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Transaksi</span></a>
+                <i class="fas fa-fw fa-book"></i>
+                <span>Laporan</span></a>
         </li>
-
+        <li class="nav-item active">
+            <a class="nav-link v" href="<?= base_url('admin/status_bayar') ?>">
+                <i class="fas fa-fw fa-money-bill-wave"></i>
+                <span>Status Bayar</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link v" href="<?= base_url('admin/status_antar') ?>">
+                <i class="fas fa-fw fa-box"></i>
+                <span>Status Antar</span></a>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

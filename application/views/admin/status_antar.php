@@ -40,7 +40,7 @@
                                 <td>Rp. <?= number_format($total['total']) ?></td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal<?= $trans['nota_pemesanan'] ?>">
-                                        Detail
+                                        <i class="fa-fw fas fa-list"></i>
                                     </button>
                                     <!-- Modal Edit -->
                                     <div class="modal fade" id="editmodal<?= $trans['nota_pemesanan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

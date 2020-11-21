@@ -101,8 +101,8 @@
                                 </td>
                                 <td>Rp. <?= number_format($total['total']) ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal<?= $trans['nota_pemesanan'] ?>">
-                                        Detail
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editmodal<?= $trans['nota_pemesanan'] ?>">
+                                        <i class="fa-fw fas fa-list"></i>
                                     </button>
                                     <!-- Modal Edit -->
                                     <div class="modal fade" id="editmodal<?= $trans['nota_pemesanan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -153,8 +153,8 @@
                                     </div>
                                     <!-- End Modal Edit -->
 
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletemodal<?= $trans['nota_pemesanan'] ?>">
-                                        Edit Status
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletemodal<?= $trans['nota_pemesanan'] ?>">
+                                        <i class="fa-fw fas fa-edit"></i>
                                     </button>
                                     <!-- Modal Delete -->
                                     <div class="modal fade" id="deletemodal<?= $trans['nota_pemesanan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

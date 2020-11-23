@@ -14,6 +14,11 @@ class Katering_Model extends CI_Model
     {
         return $this->db->where('id_pelanggan', $id)->get('tb_pelanggan')->row_array();
     }
+
+    public function detail_where($data)
+    {
+        return $this->db->where('nota_produk', $data)->join('tb_produk', 'tb_produk.id_produk=tb_detail_produk.id_produk')->get('tb_detail_produk')->result_array();
+    }
     public function insert_pemmesanan($data)
     {
         $datas = [

@@ -13,7 +13,7 @@
             $user = $this->session->userdata('id_pelanggan');
             if ($user) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('katering/') ?>keranjang">Checkout</a>
+                    <a class="nav-link" href="<?= base_url('katering/') ?>keranjang">Pesanan/Checkout</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('katering/') ?>pesanan">Keranjang</a>

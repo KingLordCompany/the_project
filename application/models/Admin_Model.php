@@ -137,5 +137,18 @@ class Admin_Model extends CI_Model
         $id = $data['id'];
         $this->db->where('tipe_bayar', $id)->delete('tb_bayar');
     }
+
+    public function count_transaksi()
+    {
+        return $this->db->select('count(nota_pemesanan) as transaksi')->get('tb_pemesanan')->row_array();
+    }
+    public function count_bayar()
+    {
+        return $this->db->select('count(nota_pemesanan) as bayar')->where('status_bayar', 'lunas')->or_where('status_bayar', 'dp')->get('tb_pemesanan')->row_array();
+    }
+    public function count_antar()
+    {
+        return $this->db->select('count(nota_pemesanan) as antar')->where('status_antar', 'selesai')->get('tb_pemesanan')->row_array();
+    }
     // END BAYAR
 }

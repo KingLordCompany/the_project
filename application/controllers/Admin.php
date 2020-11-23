@@ -15,9 +15,6 @@ class Admin extends CI_Controller
         }
     }
 
-    public function template()
-    {
-    }
     public function profile()
     {
         $user = $this->session->userdata('id_admin');
@@ -50,9 +47,13 @@ class Admin extends CI_Controller
     }
     public function index()
     {
+        $data['transaksi'] = $this->Admin_Model->count_transaksi();
+        $data['bayar'] = $this->Admin_Model->count_bayar();
+        $data['antar'] = $this->Admin_Model->count_antar();
+
         $this->load->view('template_admin/header');
         $this->load->view('template_admin/sidebar');
-        $this->load->view('admin/index');
+        $this->load->view('admin/index', $data);
         $this->load->view('template_admin/footer');
     }
 

@@ -74,11 +74,35 @@
                                 <td><?= $trans['tgl_antar'] ?></td>
                                 <td><?= $trans['status_antar'] ?></td>
                                 <td><?= $trans['status_bayar'] ?></td>
-                                <td><?= $trans['status_antar'] ?></td>
+                                <td>
+                                    <?php if ($trans['gambar'] == 'belum') { ?>
+                                        <p>belum</p>
+                                    <?php } else { ?>
+                                        <img src="<?= base_url('assets/img/validation_img/' . $trans['gambar']) ?>" alt="<?= $trans['gambar'] ?>" width="50" height="50" data-toggle="modal" data-target="#struk<?= $trans['nota_pemesanan'] ?>">
+                                        <div class="modal fade" id="struk<?= $trans['nota_pemesanan'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Struk</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img class="mx-auto w-100" src="<?= base_url('assets/img/validation_img/' . $trans['gambar']) ?>" alt="<?= $trans['gambar'] ?>">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </td>
                                 <td>Rp. <?= number_format($total['total']) ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal<?= $trans['nota_pemesanan'] ?>">
-                                        Detail
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editmodal<?= $trans['nota_pemesanan'] ?>">
+                                        <i class="fa-fw fas fa-list"></i>
                                     </button>
                                     <!-- Modal Edit -->
                                     <div class="modal fade" id="editmodal<?= $trans['nota_pemesanan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -129,8 +153,8 @@
                                     </div>
                                     <!-- End Modal Edit -->
 
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletemodal<?= $trans['nota_pemesanan'] ?>">
-                                        Edit Status
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletemodal<?= $trans['nota_pemesanan'] ?>">
+                                        <i class="fa-fw fas fa-edit"></i>
                                     </button>
                                     <!-- Modal Delete -->
                                     <div class="modal fade" id="deletemodal<?= $trans['nota_pemesanan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

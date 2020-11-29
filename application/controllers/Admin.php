@@ -15,9 +15,6 @@ class Admin extends CI_Controller
         }
     }
 
-    public function template()
-    {
-    }
     public function profile()
     {
         $user = $this->session->userdata('id_admin');
@@ -50,9 +47,13 @@ class Admin extends CI_Controller
     }
     public function index()
     {
+        $data['transaksi'] = $this->Admin_Model->count_transaksi();
+        $data['bayar'] = $this->Admin_Model->count_bayar();
+        $data['antar'] = $this->Admin_Model->count_antar();
+
         $this->load->view('template_admin/header');
         $this->load->view('template_admin/sidebar');
-        $this->load->view('admin/index');
+        $this->load->view('admin/index', $data);
         $this->load->view('template_admin/footer');
     }
 
@@ -356,6 +357,49 @@ class Admin extends CI_Controller
     // }
     // END BAYAR
 
+    // STATUS BAYAR
+    public function status_bayar()
+    {
+        $data['bayar'] = [
+            'Belum' => 'belum',
+            'DP' => 'dp',
+            'Lunas' => 'lunas'
+        ];
+        $data['antar'] = [
+            'Belum' => 'belum',
+            'Antar' => 'antar'
+        ];
+        $data['judul'] = 'Status Bayar';
+        $data['transaksi'] = $this->Admin_Model->get_status_bayar();
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/status_bayar', $data);
+        $this->load->view('template_admin/footer');
+    }
+
+    // END STATUS BAYAR
+
+    // STATUS ANTAR
+    public function status_antar()
+    {
+        $data['bayar'] = [
+            'Belum' => 'belum',
+            'DP' => 'dp',
+            'Lunas' => 'lunas'
+        ];
+        $data['antar'] = [
+            'Belum' => 'belum',
+            'Antar' => 'antar'
+        ];
+        $data['judul'] = 'Status Antar';
+        $data['transaksi'] = $this->Admin_Model->get_status_antar();
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/status_antar', $data);
+        $this->load->view('template_admin/footer');
+    }
+    // END STATUS ANTAR
+
     // TRANSAKSI
     public function transaksi()
     {
@@ -366,7 +410,7 @@ class Admin extends CI_Controller
         ];
         $data['antar'] = [
             'Belum' => 'belum',
-            'Antar' => 'antar'
+            'Selesai' => 'selesai'
         ];
         $data['judul'] = 'Transaksi';
         $data['transaksi'] = $this->Admin_Model->get_transaksi();

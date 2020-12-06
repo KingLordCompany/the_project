@@ -57,7 +57,7 @@
         <li class="nav-item active">
             <a class="nav-link v" href="<?= base_url('admin/transaksi') ?>">
                 <i class="fas fa-fw fa-book"></i>
-                <span>Laporan</span></a>
+                <span>Pesanan Masuk</span></a>
         </li>
         <li class="nav-item active">
             <a class="nav-link v" href="<?= base_url('admin/status_bayar') ?>">

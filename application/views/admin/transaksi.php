@@ -50,12 +50,13 @@
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope="col">No</th>
+                            <th scope="col">Nota Pesanan</th>
                             <th scope="col">Nama Pelanggan</th>
                             <th scope="col">Tanggal Pesan</th>
                             <th scope="col">Tanggal Kirim</th>
                             <th scope="col">Status Bayar</th>
                             <th scope="col">Status Antar</th>
-                            <th scope="col">Nota</th>
+                            <th scope="col">Bukti Transfer</th>
                             <th scope="col">Total</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -69,6 +70,7 @@
                             <tr>
 
                                 <th scope="row"><?= $no_t++; ?></th>
+                                <td><?= $trans['nota_pemesanan'] ?></td>
                                 <td><?= $trans['nm_pelanggan'] ?></td>
                                 <td><?= $trans['tgl_order'] ?></td>
                                 <td><?= $trans['tgl_antar'] ?></td>

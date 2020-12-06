@@ -34,7 +34,11 @@
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item active">
             <a class="nav-link " href="<?= base_url('admin/user') ?>"> <i class="fas fa-fw fa-user"></i>
-                <span>User</span></a>
+                <span>Admin</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link " href="<?= base_url('admin/pelanggan') ?>"> <i class="fas fa-fw fa-users"></i>
+                <span>Pelanggan</span></a>
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="<?= base_url('admin/produk') ?>"><i class="fas fa-fw fa-list"></i>

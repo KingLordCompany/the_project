@@ -151,4 +151,39 @@ class Admin_Model extends CI_Model
         return $this->db->select('count(nota_pemesanan) as antar')->where('status_antar', 'selesai')->get('tb_pemesanan')->row_array();
     }
     // END BAYAR
+
+    // PELANGGAN
+    public function get_all_pelanggan()
+    {
+        return $this->db->get('tb_pelanggan')->result_array();
+    }
+    public function delete_pelanggan($data)
+    {
+        $id = $data['id'];
+        $this->db->where('id_pelanggan', $id)->delete('tb_pelanggan');
+    }
+    public function insert_pelanggan($data)
+    {
+        $datas = [
+            'nm_pelanggan' => $data['nama'],
+            'email' => $data['email'],
+            'no_hp' => $data['telpon'],
+            'alamat' => $data['alamat'],
+            'password' => $data['password'],
+        ];
+        $this->db->insert('tb_pelanggan', $datas);
+    }
+    public function update_pelanggan($data)
+    {
+        $id = $data['id'];
+        $datas = [
+            'nm_pelanggan' => $data['nama'],
+            'email' => $data['email'],
+            'no_hp' => $data['telpon'],
+            'alamat' => $data['alamat'],
+            'password' => $data['password'],
+        ];
+        $this->db->where('id_pelanggan', $id)->update('tb_pelanggan', $datas);
+    }
+    // END PElANGGAN
 }

@@ -287,4 +287,14 @@ class Katering extends CI_Controller
         $this->session->sess_destroy();
         redirect('katering');
     }
+
+    public function pesan_invoice()
+    {
+        $id = $this->session->userdata('id_pelanggan');
+        $data['keranjang'] = $this->Katering_Model->transaksi_by_id($id);
+        $this->load->view('templates/header');
+        $this->load->view('templates/topbar_f');
+        $this->load->view('katering/invoice', $data);
+        $this->load->view('templates/footer');
+    }
 }

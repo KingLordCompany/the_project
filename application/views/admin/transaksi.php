@@ -74,8 +74,8 @@
                                 <td><?= $trans['nm_pelanggan'] ?></td>
                                 <td><?= $trans['tgl_order'] ?></td>
                                 <td><?= $trans['tgl_antar'] ?></td>
-                                <td><?= $trans['status_antar'] ?></td>
                                 <td><?= $trans['status_bayar'] ?></td>
+                                <td><?= $trans['status_antar'] ?></td>
                                 <td>
                                     <?php if ($trans['gambar'] == 'belum') { ?>
                                         <p>belum</p>

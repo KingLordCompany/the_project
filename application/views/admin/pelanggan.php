@@ -22,7 +22,7 @@
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Telpon</th>
+                            <th scope="col">No Hp</th>
                             <th scope="col">Alamat</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -92,8 +92,8 @@
                                                         <input type="email" class="form-control" id="emailuser" name="email" aria-describedby="emailHelp" value="<?= $adm['email'] ?>" placeholder="Masukan Email">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="telpon">Telpon</label>
-                                                        <input type="tel" class="form-control" id="telpon" name="telpon" aria-describedby="emailHelp" value="<?= $adm['no_hp'] ?>" placeholder="Masukan Telpon">
+                                                        <label for="telpon">No HP</label>
+                                                        <input type="tel" class="form-control" id="telpon" name="telpon" aria-describedby="emailHelp" value="<?= $adm['no_hp'] ?>" placeholder="Masukan No HP">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlTextarea1">Alamat</label>
@@ -145,8 +145,8 @@
                     <input type="email" class="form-control" id="emailuser" name="email" aria-describedby="emailHelp" placeholder="Masukan Email">
                 </div>
                 <div class="form-group">
-                    <label for="telpon">Telpon</label>
-                    <input type="tel" class="form-control" id="telpon" name="telpon" aria-describedby="emailHelp" placeholder="Masukan Telpon">
+                    <label for="telpon">No HP</label>
+                    <input type="tel" class="form-control" id="telpon" name="telpon" aria-describedby="emailHelp" placeholder="Masukan No HP">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Alamat</label>

@@ -38,3 +38,16 @@ $(document).ready(function() {
      $('#dtBasicExample').DataTable();
      $('.dataTables_length').addClass('bs-select');
  });
+// $(".prasmanan").hide();
+$('.semua-status').on('click', function () {
+     $(".paket").show();
+     $(".prasmanan").show();
+});
+$('.paket-status').on('click', function () {
+     $(".paket").show();
+     $(".prasmanan").hide();
+});
+$('.prasmanan-status').on('click', function () {
+     $(".paket").hide();
+     $(".prasmanan").show();
+});

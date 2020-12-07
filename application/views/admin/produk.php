@@ -27,6 +27,8 @@
                             <th scope="col">Minumal Pesan</th>
                             <th scope="col">Foto</th>
                             <th scope="col">Deskripsi</th>
+                            <th scope="col">Satuan</th>
+                            <th scope="col">Kategori</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -44,6 +46,8 @@
                                     <img src="<?= base_url('assets/img/' . $adm['foto']) ?>" alt="<?= $adm['foto'] ?>" height="100" width="100">
                                 </td>
                                 <td><?= $adm['deskripsi'] ?></td>
+                                <td><?= $adm['satuan'] ?></td>
+                                <td><?= $adm['kategori'] ?></td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal<?= $adm['id_produk'] ?>">
                                         Edit
@@ -87,6 +91,26 @@
                                                         <label for="exampleFormControlTextarea1">Deskripsi</label>
                                                         <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3"><?= $adm['deskripsi'] ?></textarea>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleFormControlSelect2">Satuan</label>
+                                                        <select class="form-control" name="satuan" id="exampleFormControlSelect2">
+                                                            <?php foreach ($satuan as $key => $value) { ?>
+                                                                <option value="<?= $value ?>" <?php if ($value == $adm['satuan']) {
+                                                                                                    echo "selected";
+                                                                                                } ?>><?= $key ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleFormControlSelect2">Kategori</label>
+                                                        <select class="form-control" name="kategori" id="exampleFormControlSelect2">
+                                                            <?php foreach ($kategori as $key => $value) { ?>
+                                                                <option value="<?= $value ?>" <?php if ($value == $adm['kategori']) {
+                                                                                                    echo "selected";
+                                                                                                } ?>><?= $key ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -116,6 +140,7 @@
                                                     <input type="hidden" class="form-control" id="namauser" name="produk" value="<?= $adm['id_produk'] ?>">
                                                     <h6>Apakah anda yakin ingin menghapus data?</h6>
                                                 </div>
+
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -173,6 +198,22 @@
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Deskripsi</label>
                     <textarea class="form-control" name="deskripsi" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">Satuan</label>
+                    <select class="form-control" name="satuan" id="exampleFormControlSelect2">
+                        <?php foreach ($satuan as $key => $value) { ?>
+                            <option value="<?= $value ?>"><?= $key ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">Kategori</label>
+                    <select class="form-control" name="kategori" id="exampleFormControlSelect2">
+                        <?php foreach ($kategori as $key => $value) { ?>
+                            <option value="<?= $value ?>"><?= $key ?></option>
+                        <?php } ?>
+                    </select>
                 </div>
             </div>
             <div class="modal-footer">

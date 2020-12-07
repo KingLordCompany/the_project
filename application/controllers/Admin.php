@@ -88,8 +88,6 @@ class Admin extends CI_Controller
               </div>');
             redirect('admin/user');
         }
-        $data = $this->input->post();
-        $this->Admin_Model->insert_user($data);
     }
 
     public function delete_admin()
@@ -111,13 +109,22 @@ class Admin extends CI_Controller
         }
     }
 
+    // END USER
 
 
-    // USER
+    // PRODUK
     public function produk()
     {
         $data['judul'] = 'Produk';
         $data['produk'] = $this->Admin_Model->get_all_produk();
+        $data['satuan'] = [
+            'Porsi' => 'porsi',
+            'Kotak' => 'kotak'
+        ];
+        $data['kategori'] = [
+            'Prasmanan' => 'prasmanan',
+            'Paket' => 'paket'
+        ];
 
         $this->load->view('template_admin/header');
         $this->load->view('template_admin/sidebar');
@@ -129,6 +136,8 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('nama_produk', 'Nama Produk', 'required');
         $this->form_validation->set_rules('harga', 'Harga', 'required|is_natural');
         $this->form_validation->set_rules('minimal_pesan', 'Minimal Pesan', 'required|is_natural');
+        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
         // $this->form_validation->set_rules('file', 'Foto', 'required');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
         if ($this->form_validation->run() == FALSE) {
@@ -168,6 +177,8 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('harga', 'Harga', 'required|is_natural');
         $this->form_validation->set_rules('minimal_pesan', 'Minimal Pesan', 'required|is_natural');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
+        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
             Data gagal dimasukan
@@ -227,7 +238,7 @@ class Admin extends CI_Controller
             redirect('admin/produk');
         }
     }
-    // END USER
+    // END PRODUK
 
     // BANK
 
@@ -306,9 +317,82 @@ class Admin extends CI_Controller
 
     // END BANK
 
-    // END USER
+    // END PELANGGAN
+    public function pelanggan()
+    {
+        $data['judul'] = 'pelanggan';
+        $data['admin'] = $this->Admin_Model->get_all_pelanggan();
 
-    // USER
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/pelanggan', $data);
+        $this->load->view('template_admin/footer');
+    }
+    public function insert_pelanggan()
+    {
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('alamat', 'alamat', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
+        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[tb_admin.email]|valid_email');
+        $this->form_validation->set_rules('telpon', 'Telpon', 'required|is_natural|min_length[10]|is_unique[tb_admin.no_hp]');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Data gagal dimasukan
+          </div>');
+            redirect('admin/pelanggan');
+        } else {
+            $data = $this->input->post();
+            $this->Admin_Model->insert_pelanggan($data);
+
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+                Data berhasil masukan
+              </div>');
+            redirect('admin/pelanggan');
+        }
+    }
+    public function update_pelanggan()
+    {
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('alamat', 'alamat', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
+        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[tb_admin.email]|valid_email');
+        $this->form_validation->set_rules('telpon', 'Telpon', 'required|is_natural|min_length[10]|is_unique[tb_admin.no_hp]');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Data gagal edit
+          </div>');
+            redirect('admin/pelanggan');
+        } else {
+            $data = $this->input->post();
+            $this->Admin_Model->update_pelanggan($data);
+
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+                Data berhasil edit
+              </div>');
+            redirect('admin/pelanggan');
+        }
+    }
+    public function delete_pelanggan()
+    {
+        $this->form_validation->set_rules('id', 'Pelanggan', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
+            Data gagal dihapus
+          </div>');
+            redirect('admin/pelanggan');
+        } else {
+            $data = $this->input->post();
+            $this->Admin_Model->delete_pelanggan($data);
+
+            $this->session->set_flashdata('alert', '<div class="alert alert-success" role="alert">
+                Data berhasil dihapus
+              </div>');
+            redirect('admin/pelanggan');
+        }
+    }
+    // END PELANGGAN
+
+
     // public function kategori()
     // {
     //     $data['judul'] = 'Kategori';
@@ -378,6 +462,27 @@ class Admin extends CI_Controller
     }
 
     // END STATUS BAYAR
+    // MENUNGGU DIANTAR
+    public function menunggu_diantar()
+    {
+        $data['bayar'] = [
+            'Belum' => 'belum',
+            'DP' => 'dp',
+            'Lunas' => 'lunas'
+        ];
+        $data['antar'] = [
+            'Belum' => 'belum',
+            'Antar' => 'antar'
+        ];
+        $data['judul'] = 'Menunggu Diantar';
+        $data['transaksi'] = $this->Admin_Model->get_status_bayar();
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/menunggu', $data);
+        $this->load->view('template_admin/footer');
+    }
+
+    // END MENUNGGU DIANTAR
 
     // STATUS ANTAR
     public function status_antar()

@@ -34,7 +34,11 @@
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item active">
             <a class="nav-link " href="<?= base_url('admin/user') ?>"> <i class="fas fa-fw fa-user"></i>
-                <span>User</span></a>
+                <span>Admin</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link " href="<?= base_url('admin/pelanggan') ?>"> <i class="fas fa-fw fa-users"></i>
+                <span>Pelanggan</span></a>
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="<?= base_url('admin/produk') ?>"><i class="fas fa-fw fa-list"></i>
@@ -53,12 +57,18 @@
         <li class="nav-item active">
             <a class="nav-link v" href="<?= base_url('admin/transaksi') ?>">
                 <i class="fas fa-fw fa-book"></i>
-                <span>Laporan</span></a>
+                <span>Pesanan Masuk</span></a>
         </li>
+
         <li class="nav-item active">
             <a class="nav-link v" href="<?= base_url('admin/status_bayar') ?>">
                 <i class="fas fa-fw fa-money-bill-wave"></i>
                 <span>Status Bayar</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link v" href="<?= base_url('admin/menunggu_diantar') ?>">
+                <i class="fas fa-fw fa-clock"></i>
+                <span>Menunggu Diantar</span></a>
         </li>
         <li class="nav-item active">
             <a class="nav-link v" href="<?= base_url('admin/status_antar') ?>">

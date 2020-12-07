@@ -472,7 +472,7 @@ class Admin extends CI_Controller
         ];
         $data['antar'] = [
             'Belum' => 'belum',
-            'Antar' => 'antar'
+            'Antar Pesanan' => 'selesai'
         ];
         $data['judul'] = 'Menunggu Diantar';
         $data['transaksi'] = $this->Admin_Model->get_status_bayar();

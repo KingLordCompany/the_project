@@ -117,6 +117,14 @@ class Admin extends CI_Controller
     {
         $data['judul'] = 'Produk';
         $data['produk'] = $this->Admin_Model->get_all_produk();
+        $data['satuan'] = [
+            'Porsi' => 'porsi',
+            'Kotak' => 'kotak'
+        ];
+        $data['kategori'] = [
+            'Prasmanan' => 'prasmanan',
+            'Paket' => 'paket'
+        ];
 
         $this->load->view('template_admin/header');
         $this->load->view('template_admin/sidebar');
@@ -128,6 +136,8 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('nama_produk', 'Nama Produk', 'required');
         $this->form_validation->set_rules('harga', 'Harga', 'required|is_natural');
         $this->form_validation->set_rules('minimal_pesan', 'Minimal Pesan', 'required|is_natural');
+        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
         // $this->form_validation->set_rules('file', 'Foto', 'required');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
         if ($this->form_validation->run() == FALSE) {
@@ -167,6 +177,8 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('harga', 'Harga', 'required|is_natural');
         $this->form_validation->set_rules('minimal_pesan', 'Minimal Pesan', 'required|is_natural');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
+        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
             Data gagal dimasukan

@@ -49,6 +49,8 @@ class Admin_Model extends CI_Model
             'minimal_pesan' => $data['minimal_pesan'],
             'foto' => $data['foto'],
             'deskripsi' => $data['deskripsi'],
+            'satuan' => $data['satuan'],
+            'kategori' => $data['kategori'],
         ];
         $this->db->insert('tb_produk', $datas);
     }
@@ -62,6 +64,8 @@ class Admin_Model extends CI_Model
             'minimal_pesan' => $data['minimal_pesan'],
             'foto' => $data['foto'],
             'deskripsi' => $data['deskripsi'],
+            'satuan' => $data['satuan'],
+            'kategori' => $data['kategori'],
         ];
         $this->db->where('id_produk', $id)->update('tb_produk', $datas);
     }

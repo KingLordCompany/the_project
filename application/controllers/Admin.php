@@ -462,6 +462,27 @@ class Admin extends CI_Controller
     }
 
     // END STATUS BAYAR
+    // MENUNGGU DIANTAR
+    public function menunggu_diantar()
+    {
+        $data['bayar'] = [
+            'Belum' => 'belum',
+            'DP' => 'dp',
+            'Lunas' => 'lunas'
+        ];
+        $data['antar'] = [
+            'Belum' => 'belum',
+            'Antar' => 'antar'
+        ];
+        $data['judul'] = 'Menunggu Diantar';
+        $data['transaksi'] = $this->Admin_Model->get_status_bayar();
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/menunggu', $data);
+        $this->load->view('template_admin/footer');
+    }
+
+    // END MENUNGGU DIANTAR
 
     // STATUS ANTAR
     public function status_antar()

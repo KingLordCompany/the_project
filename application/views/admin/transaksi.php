@@ -158,7 +158,7 @@
                                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletemodal<?= $trans['nota_pemesanan'] ?>">
                                         <i class="fa-fw fas fa-edit"></i>
                                     </button>
-                                    <!-- Modal Delete -->
+                                    <!-- Edit Status -->
                                     <div class="modal fade" id="deletemodal<?= $trans['nota_pemesanan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -182,15 +182,15 @@
                                                                                                     } ?>><?= $key ?></option>
                                                                 <?php } ?>
                                                             </select>
+                                                            <!-- <label for="exampleFormControlSelect1">Status Antar</label>
+                                                            <select class="form-control" name="antar" id="exampleFormControlSelect1">
+                                                                <?php foreach ($antar as $key => $value) { ?>
+                                                                    <option value="<?= $value ?>" <?php if ($value == $trans['status_antar']) {
+                                                                                                        echo 'selected';
+                                                                                                    } ?>><?= $key ?></option>
+                                                            <?php } ?> -->
+                                                            </select>
                                                         </div>
-                                                        <label for="exampleFormControlSelect1">Status Antar</label>
-                                                        <select class="form-control" name="antar" id="exampleFormControlSelect1">
-                                                            <?php foreach ($antar as $key => $value) { ?>
-                                                                <option value="<?= $value ?>" <?php if ($value == $trans['status_antar']) {
-                                                                                                    echo 'selected';
-                                                                                                } ?>><?= $key ?></option>
-                                                            <?php } ?>
-                                                        </select>
                                                     </div>
 
                                                 </div>
@@ -202,7 +202,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- End Modal Delete -->
+                                    <!-- End Edit Status -->
                                 </td>
                             </tr>
                         <?php } ?>

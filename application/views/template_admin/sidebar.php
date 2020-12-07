@@ -66,7 +66,7 @@
                 <span>Status Bayar</span></a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link v" href="<?= base_url('admin/status_bayar') ?>">
+            <a class="nav-link v" href="<?= base_url('admin/menunggu_diantar') ?>">
                 <i class="fas fa-fw fa-clock"></i>
                 <span>Menunggu Diantar</span></a>
         </li>

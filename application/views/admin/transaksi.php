@@ -182,6 +182,7 @@
                                                                                                     } ?>><?= $key ?></option>
                                                                 <?php } ?>
                                                             </select>
+                                                            <input type="hidden" name="antar" value="<?= $trans['status_antar']; ?>">
                                                             <!-- <label for="exampleFormControlSelect1">Status Antar</label>
                                                             <select class="form-control" name="antar" id="exampleFormControlSelect1">
                                                                 <?php foreach ($antar as $key => $value) { ?>

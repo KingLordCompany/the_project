@@ -2,9 +2,14 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Katering_Model extends CI_Model
 {
-    public function produk()
+    public function produk($kategori = null)
     {
-        return $this->db->get('tb_produk')->result_array();
+        if ($kategori !=  null) {
+            return $this->db->get_where('tb_produk',array('kategori' => $kategori))->result_array();
+        }else{
+            return $this->db->get('tb_produk')->result_array();
+        }
+
     }
     public function produk_once($id)
     {

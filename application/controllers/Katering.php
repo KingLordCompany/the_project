@@ -11,9 +11,11 @@ class Katering extends CI_Controller
         require APPPATH . 'third_party/dompdf/dompdf_config.inc.php';
     }
 
-    public function index()
+    public function index($kategori = null)
     {
-        $data['produk'] = $this->Katering_Model->produk();
+        $data['produk'] = $this->Katering_Model->produk($kategori);
+        $data['title'] = $kategori == null ? "Semua Produk" : ucfirst($kategori);
+        
         $this->load->view('templates/header');
         $this->load->view('templates/topbar_f');
         $this->load->view('katering/index', $data);

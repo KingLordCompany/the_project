@@ -71,12 +71,12 @@ class Admin extends CI_Controller
     public function insert_user()
     {
         $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
         $this->form_validation->set_rules('email', 'Email', 'required|is_unique[tb_admin.email]|valid_email');
         $this->form_validation->set_rules('telpon', 'Telpon', 'required|is_natural|min_length[10]|is_unique[tb_admin.no_hp]');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">
-            Data gagal dimasukan
+            Data gagal dimasukan '.validation_errors().'
           </div>');
             redirect('admin/user');
         } else {
@@ -472,7 +472,7 @@ class Admin extends CI_Controller
         ];
         $data['antar'] = [
             'Belum' => 'belum',
-            'Antar' => 'antar'
+            'Antar Pesanan' => 'selesai'
         ];
         $data['judul'] = 'Menunggu Diantar';
         $data['transaksi'] = $this->Admin_Model->get_status_bayar();

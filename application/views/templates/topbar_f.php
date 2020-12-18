@@ -108,8 +108,8 @@
                                         <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Masukan Email">
                                     </div>
                                     <div class="form-group">
-                                        <label for="telpon">Telpon</label>
-                                        <input type="tel" class="form-control" name="telpon" id="telpon" aria-describedby="emailHelp" placeholder="Masukan Telpon">
+                                        <label for="telpon">No Hp</label>
+                                        <input type="tel" class="form-control" name="telpon" id="telpon" aria-describedby="emailHelp" placeholder="Masukan No HP">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Alamat</label>
@@ -120,7 +120,7 @@
                                         <input type="password" class="form-control" name="pass1" id="password-daftar" placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Konfirmai Password</label>
+                                        <label for="exampleInputPassword1">Konfirmasi Password</label>
                                         <input type="password" class="form-control" name="pass2" id="password-daftar-confirm" placeholder="Password">
                                     </div>
                                 </div>

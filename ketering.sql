@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Nov 2020 pada 07.05
--- Versi server: 10.1.30-MariaDB
--- Versi PHP: 7.2.2
+-- Generation Time: Dec 07, 2020 at 01:31 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_admin`
+-- Table structure for table `tb_admin`
 --
 
 CREATE TABLE `tb_admin` (
@@ -37,16 +36,17 @@ CREATE TABLE `tb_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_admin`
+-- Dumping data for table `tb_admin`
 --
 
 INSERT INTO `tb_admin` (`id_admin`, `username`, `email`, `no_hp`, `password`) VALUES
-(1, 'muhammad_fahmy', 'user@user.com', '085741852963', '123');
+(1, 'owner', 'owner@gmail.com', '085741852963', '123'),
+(2, 'mimin cantiq', 'mimin@gmail.com', '0821432245322', '12345');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_bayar`
+-- Table structure for table `tb_bayar`
 --
 
 CREATE TABLE `tb_bayar` (
@@ -56,17 +56,17 @@ CREATE TABLE `tb_bayar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_bayar`
+-- Dumping data for table `tb_bayar`
 --
 
 INSERT INTO `tb_bayar` (`tipe_bayar`, `nama_rekening`, `no_rekening`) VALUES
-('BCA', 'dimas', '87825423'),
-('BNI', 'Fiddy', '9477543');
+('BCA', 'Siti Ayu W', '545123545'),
+('BNI', 'Siti Ayu W', '66758192192');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_detail_produk`
+-- Table structure for table `tb_detail_produk`
 --
 
 CREATE TABLE `tb_detail_produk` (
@@ -79,7 +79,7 @@ CREATE TABLE `tb_detail_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_detail_produk`
+-- Dumping data for table `tb_detail_produk`
 --
 
 INSERT INTO `tb_detail_produk` (`id_detail`, `id_produk`, `nota_produk`, `total_harga`, `catatan`, `jumlah_pesan`) VALUES
@@ -92,7 +92,7 @@ INSERT INTO `tb_detail_produk` (`id_detail`, `id_produk`, `nota_produk`, `total_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_keranjang`
+-- Table structure for table `tb_keranjang`
 --
 
 CREATE TABLE `tb_keranjang` (
@@ -105,16 +105,17 @@ CREATE TABLE `tb_keranjang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_keranjang`
+-- Dumping data for table `tb_keranjang`
 --
 
 INSERT INTO `tb_keranjang` (`id_keranjang`, `id_pelanggan`, `id_produk`, `jumlah_pesan`, `total_harga`, `catatan`) VALUES
+(5934, 2, 6, 1, 20000, 'Engga pedes'),
 (48175, 1, 2, 15, 180000, 'fdsfdfddfdfdfdfdfdfdf');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pelanggan`
+-- Table structure for table `tb_pelanggan`
 --
 
 CREATE TABLE `tb_pelanggan` (
@@ -124,35 +125,36 @@ CREATE TABLE `tb_pelanggan` (
   `email` varchar(30) NOT NULL,
   `no_hp` varchar(15) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `tgl_daftar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `tgl_daftar` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_pelanggan`
+-- Dumping data for table `tb_pelanggan`
 --
 
 INSERT INTO `tb_pelanggan` (`id_pelanggan`, `nm_pelanggan`, `alamat`, `email`, `no_hp`, `password`, `tgl_daftar`) VALUES
-(1, 'muhammad fahmy', 'melati', 'muhammadfahmy123@gmail.com', '085789456123', 'lahkokbisa', '2020-10-01 13:31:33');
+(1, 'muhammad fahmy', 'melati', 'muhammadfahmy123@gmail.com', '085789456123', 'lahkokbisa', '2020-10-01 13:31:33'),
+(2, 'Ayu', 'Trini Sleman Belakang Mushola', 'ayu@gmail.com', '082175439495', '123', '2020-12-07 12:17:12');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pemesanan`
+-- Table structure for table `tb_pemesanan`
 --
 
 CREATE TABLE `tb_pemesanan` (
   `nota_pemesanan` varchar(20) NOT NULL,
   `tipe_bayar` varchar(20) NOT NULL,
   `id_pelanggan` int(11) NOT NULL,
-  `tgl_order` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `tgl_antar` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `tgl_order` datetime NOT NULL DEFAULT current_timestamp(),
+  `tgl_antar` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
   `gambar` text NOT NULL,
   `status_bayar` enum('belum','dp','lunas') NOT NULL,
   `status_antar` enum('belum','selesai') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_pemesanan`
+-- Dumping data for table `tb_pemesanan`
 --
 
 INSERT INTO `tb_pemesanan` (`nota_pemesanan`, `tipe_bayar`, `id_pelanggan`, `tgl_order`, `tgl_antar`, `gambar`, `status_bayar`, `status_antar`) VALUES
@@ -164,7 +166,7 @@ INSERT INTO `tb_pemesanan` (`nota_pemesanan`, `tipe_bayar`, `id_pelanggan`, `tgl
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_produk`
+-- Table structure for table `tb_produk`
 --
 
 CREATE TABLE `tb_produk` (
@@ -173,37 +175,40 @@ CREATE TABLE `tb_produk` (
   `harga` int(11) NOT NULL,
   `minimal_pesan` int(11) NOT NULL,
   `foto` varchar(100) NOT NULL,
-  `deskripsi` text NOT NULL
+  `deskripsi` text NOT NULL,
+  `satuan` enum('kotak','porsi') NOT NULL,
+  `kategori` enum('prasmanan','paket') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_produk`
+-- Dumping data for table `tb_produk`
 --
 
-INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `harga`, `minimal_pesan`, `foto`, `deskripsi`) VALUES
-(2, 'Nasi Goreng', 12000, 15, 'download.jpg', 'Nasi Goreng Zimbabwe'),
-(3, 'Nasi Kuning', 13000, 15, 'nasi-kuning-rice-cooker.jpg', 'Nasi kuning Himalaya'),
-(4, 'Opor Ayam', 10000, 15, 'Resep-Opor-Ayam.jpg', 'Opor Ayam Bali'),
-(5, 'Sate', 10000, 15, 'Sate_Ponorogo.jpg', 'Sate Ponorogo');
+INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `harga`, `minimal_pesan`, `foto`, `deskripsi`, `satuan`, `kategori`) VALUES
+(2, 'Nasi Goreng', 12000, 15, 'download.jpg', 'Nasi Goreng Zimbabwe', 'kotak', 'paket'),
+(3, 'Nasi Kuning', 13000, 15, 'nasi-kuning-rice-cooker.jpg', 'Nasi kuning Himalaya', 'kotak', 'paket'),
+(4, 'Opor Ayam', 10000, 15, 'Resep-Opor-Ayam.jpg', 'Opor Ayam Bali', 'kotak', 'paket'),
+(5, 'Sate', 10000, 15, 'Sate_Ponorogo.jpg', 'Sate Ponorogo', 'kotak', 'paket'),
+(6, 'Prasmanan 1', 20000, 1, 'prasmanan_1.jpeg', 'menu prasmanan ada lombok, ayam, kacang, rempah rempah', 'porsi', 'prasmanan');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `tb_admin`
+-- Indexes for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indeks untuk tabel `tb_bayar`
+-- Indexes for table `tb_bayar`
 --
 ALTER TABLE `tb_bayar`
   ADD PRIMARY KEY (`tipe_bayar`);
 
 --
--- Indeks untuk tabel `tb_detail_produk`
+-- Indexes for table `tb_detail_produk`
 --
 ALTER TABLE `tb_detail_produk`
   ADD PRIMARY KEY (`id_detail`),
@@ -211,71 +216,71 @@ ALTER TABLE `tb_detail_produk`
   ADD KEY `id_produk` (`id_produk`);
 
 --
--- Indeks untuk tabel `tb_keranjang`
+-- Indexes for table `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
   ADD PRIMARY KEY (`id_keranjang`);
 
 --
--- Indeks untuk tabel `tb_pelanggan`
+-- Indexes for table `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `tb_pemesanan`
+-- Indexes for table `tb_pemesanan`
 --
 ALTER TABLE `tb_pemesanan`
   ADD PRIMARY KEY (`nota_pemesanan`),
   ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `tb_produk`
+-- Indexes for table `tb_produk`
 --
 ALTER TABLE `tb_produk`
   ADD PRIMARY KEY (`id_produk`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_admin`
+-- AUTO_INCREMENT for table `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_detail_produk`
+-- AUTO_INCREMENT for table `tb_detail_produk`
 --
 ALTER TABLE `tb_detail_produk`
   MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_pelanggan`
+-- AUTO_INCREMENT for table `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_produk`
+-- AUTO_INCREMENT for table `tb_produk`
 --
 ALTER TABLE `tb_produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tb_detail_produk`
+-- Constraints for table `tb_detail_produk`
 --
 ALTER TABLE `tb_detail_produk`
   ADD CONSTRAINT `tb_detail_produk_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `tb_produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_detail_produk_ibfk_3` FOREIGN KEY (`nota_produk`) REFERENCES `tb_pemesanan` (`nota_pemesanan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_pemesanan`
+-- Constraints for table `tb_pemesanan`
 --
 ALTER TABLE `tb_pemesanan`
   ADD CONSTRAINT `tb_pemesanan_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`) ON DELETE CASCADE ON UPDATE CASCADE;

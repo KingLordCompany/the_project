@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katering</title>
+    <title>DeeSqi Cathering</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/fontawesome/css/all.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/datatable/css/datatables.min.css') ?>">

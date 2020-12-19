@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Katering Ku</title>
+    <title>DeeSqi Cathering</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/sba/') ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

@@ -1,9 +1,7 @@
 <div class="container mt-3">
     <div class="jumbotron">
         <h1 class="display-4">Pesan sekarang di, Kateringku</h1>
-        <p class="lead">Melayani pemesanan ketering dengan praktis dan mudah</p>
-        <hr class="my-4">
-
+        <marquee class="lead">Melayani pemesanan ketering dengan praktis dan mudah</marquee>
         <?= $this->session->flashdata('alert'); ?>
     </div>
     <div class="alert alert-info" role="alert">

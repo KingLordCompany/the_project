@@ -559,4 +559,25 @@ class Admin extends CI_Controller
     }
     // END TRANSAKSI
 
+    public function rekap()
+    {
+        $tgl_awal = $this->input->post('date_awal');
+        $tgl_akhir = $this->input->post('date_akhir');
+        if ($tgl_awal == NULL) {
+            $tgl_awal = date('Y-m-01');
+            $tgl_akhir = date('Y-m-31');
+        }else{
+            $tgl_awal = date_format(date_create($tgl_awal),"Y-m-d");  
+            $tgl_akhir = date_format(date_create($tgl_akhir),"Y-m-d");  
+        }
+        $data['judul'] = 'Rekap Pemesanan';
+        $data['tgl_awal'] = $tgl_awal;
+        $data['tgl_akhir'] = $tgl_akhir;
+        $data['transaksi'] = $this->Admin_Model->dataRekap($tgl_awal,$tgl_akhir);
+        $this->load->view('template_admin/header');
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/rekap_v', $data);
+        $this->load->view('template_admin/footer');
+    }
+
 }

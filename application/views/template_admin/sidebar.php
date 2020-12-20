@@ -9,7 +9,7 @@
             <div class="sidebar-brand-icon">
                 <i class="fas fa-home"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Katering Ku</div>
+            <div class="sidebar-brand-text mx-3">DeeSqi Cathering</div>
         </a>
 
         <!-- Divider -->
@@ -77,6 +77,11 @@
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
+        <li class="nav-item active">
+            <a class="nav-link v" href="<?= base_url('admin/rekap') ?>">
+                <i class="far fa-fw fa-chart-bar"></i>
+                <span>Rekapitulasi Pesanan</span></a>
+        </li>
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

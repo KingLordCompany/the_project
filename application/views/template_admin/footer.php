@@ -8,7 +8,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+            <span>Copyright &copy; DeeSqi Cathering 2020</span>
         </div>
     </div>
 </footer>
@@ -54,18 +54,28 @@
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/sba/') ?>js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="<?= base_url('assets/sba/') ?>vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="<?= base_url('assets/sba/') ?>js/demo/chart-area-demo.js"></script>
-<script src="<?= base_url('assets/sba/') ?>js/demo/chart-pie-demo.js"></script>
 <script src="<?= base_url('assets/') ?>js/scripts.js"></script>
-<script src="<?= base_url('assets/') ?>js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url('assets') ?>/datatables/jquery.dataTables.js"></script>
+<script src="<?= base_url('assets') ?>/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="<?= base_url('assets') ?>/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<?= base_url('assets') ?>/datatables-buttons/js/buttons.html5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable();
+        $("#tabel_rekap").DataTable({
+            "scrollX": true,
+            "scrollCollapse": true,
+            dom: "<'row' <'col-sm-12 col-md-6'B>  <'col-sm-12 col-md-6'f> > <'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [{
+                    extend: 'excelHtml5',
+                    title: 'Rekapitulasi Pemesanan'
+                }
+            ]
+        });
     });
 </script>
 </body>

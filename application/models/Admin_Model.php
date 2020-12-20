@@ -190,4 +190,19 @@ class Admin_Model extends CI_Model
         $this->db->where('id_pelanggan', $id)->update('tb_pelanggan', $datas);
     }
     // END PElANGGAN
+
+    //Rekapitulasi
+    public function dataRekap($tgl_awal, $tgl_akhir)
+    {
+        return $this->db
+            ->select('*')
+            ->from('tb_pemesanan')
+            ->join('tb_detail_produk','tb_pemesanan.nota_pemesanan = tb_detail_produk.nota_produk')
+            ->join('tb_produk','tb_produk.id_produk = tb_detail_produk.id_produk')
+            ->where("tb_pemesanan.tgl_order BETWEEN '$tgl_awal' AND '$tgl_akhir'")
+            ->where("tb_pemesanan.status_bayar <> 'belum' ")
+            ->get()
+            ->result_array();
+    }
+
 }

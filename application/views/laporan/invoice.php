@@ -118,7 +118,7 @@
     </div>
     <div class="header">
         <pre class="data">
-        Nomor tensaksi   : <?= $transaksi['nota_pemesanan'] ?> <br>
+        Nota Pemesanan   : <?= $transaksi['nota_pemesanan'] ?> <br>
         Tanggal Pesan    : <?= $transaksi['tgl_order'] ?> <br>
         Tipe Bayar       : <?= $transaksi['tipe_bayar'] ?> <br>
         Nomor Pelanggan  : <?= $pelanggan['nm_pelanggan'] ?> <br>

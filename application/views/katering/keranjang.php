@@ -11,6 +11,7 @@
                 <th class="th-sm">Struk</th>
                 <th class="th-sm">Detail</th>
                 <th class="th-sm">Validasi Pembayaran</th>
+                <th class="th-sm">Cetak Pesanan</th>
             </tr>
         </thead>
         <tbody>
@@ -144,6 +145,9 @@
                             echo ' Selesai';
                         } ?>
                     </td>
+                    <td>
+                        <a href="<?= base_url("katering/tampil/" . $keranjang['nota_pemesanan']) ?>" class="btn btn-danger" data-dismiss="modal">Cetak Struk</a>
+                    </td>
                 </tr>
             <?php } ?>
         </tbody>
@@ -156,6 +160,7 @@
                 <th class="th-sm">Struk</th>
                 <th class="th-sm">Detail</th>
                 <th class="th-sm">Validasi Pembayaran</th>
+                <th class="th-sm">Cetak Pesanan</th>
             </tr>
         </tfoot>
     </table>

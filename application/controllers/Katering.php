@@ -15,7 +15,7 @@ class Katering extends CI_Controller
     {
         $data['produk'] = $this->Katering_Model->produk($kategori);
         $data['title'] = $kategori == null ? "Semua Produk" : ucfirst($kategori);
-        
+
         $this->load->view('templates/header');
         $this->load->view('templates/topbar_f');
         $this->load->view('katering/index', $data);
@@ -187,30 +187,17 @@ class Katering extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    function _invoice()
+    public function tampil($id_transaksi)
     {
         $dompdf = new DOMPDF();
-        $data = ['nama' => 'fahmy'];
-        $data['bank'] = $this->Katering_Model->get_all_bayar();
+        $data['transaksi'] = $this->Katering_Model->transaksi_by_nota($id_transaksi);
+        $data['pelanggan'] = $this->Katering_Model->user_by_id($data['transaksi']['id_pelanggan']);
         $html = $this->load->view('laporan/invoice', $data, true);
         $dompdf->load_html($html);
         $dompdf->set_paper('A4', 'landscape');
         $dompdf->render();
-        $pdf = $dompdf->output();
+        // $pdf = $dompdf->output();
         $dompdf->stream('invoice.pdf', ['Attachmment' => false]);
-    }
-
-    public function tampil()
-    {
-        // $dompdf = new DOMPDF();
-        $data = ['nama' => 'fahmy'];
-        $data['bank'] = $this->Katering_Model->get_all_bayar();
-        $this->load->view('laporan/invoice', $data);
-        // $dompdf->load_html($html);
-        // $dompdf->set_paper('A4', 'landscape');
-        // $dompdf->render();
-        // // $pdf = $dompdf->output();
-        // $dompdf->stream('invoice.pdf', ['Attachmment' => false]);
     }
 
     public function hapus_pesanan()

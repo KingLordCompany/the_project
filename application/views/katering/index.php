@@ -1,6 +1,6 @@
 <div class="container mt-3">
     <div class="jumbotron">
-        <h1 class="display-4">Pesan sekarang di, Kateringku</h1>
+        <h1 class="display-4">Pesan sekarang di, DeeSqi Cathering</h1>
         <marquee class="lead">Melayani pemesanan ketering dengan praktis dan mudah</marquee>
         <?= $this->session->flashdata('alert'); ?>
     </div>
@@ -18,17 +18,17 @@
     </div>
     <div class="container d-flex justify-content-center">
         <div class="row">
-            <?php foreach ($produk as $data) {?>
-                    <div class="col mt-3">
-                        <div class="card" style="width: 15rem;">
-                            <img class="card-img-top" src="<?= base_url('assets/img/' . $data['foto']) ?>" height="300" width="100" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $data['nama_produk'] ?></h5>
-                                <p class="card-text"><?= $data['deskripsi'] ?></p>
-                                <a href="<?= base_url('katering/pesan/' . $data['id_produk']) ?>" class="btn btn-success"> <i class="fas fa-cart-plus"></i> Pesan</a>
-                            </div>
+            <?php foreach ($produk as $data) { ?>
+                <div class="col mt-3">
+                    <div class="card" style="width: 15rem;">
+                        <img class="card-img-top" src="<?= base_url('assets/img/' . $data['foto']) ?>" height="300" width="100" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $data['nama_produk'] ?></h5>
+                            <p class="card-text"><?= $data['deskripsi'] ?></p>
+                            <a href="<?= base_url('katering/pesan/' . $data['id_produk']) ?>" class="btn btn-success"> <i class="fas fa-cart-plus"></i> Pesan</a>
                         </div>
                     </div>
+                </div>
             <?php } ?>
         </div>
     </div>

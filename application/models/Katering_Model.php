@@ -5,11 +5,10 @@ class Katering_Model extends CI_Model
     public function produk($kategori = null)
     {
         if ($kategori !=  null) {
-            return $this->db->get_where('tb_produk',array('kategori' => $kategori))->result_array();
-        }else{
+            return $this->db->get_where('tb_produk', array('kategori' => $kategori))->result_array();
+        } else {
             return $this->db->get('tb_produk')->result_array();
         }
-
     }
     public function produk_once($id)
     {
@@ -52,6 +51,10 @@ class Katering_Model extends CI_Model
     public function transaksi_by_id($id)
     {
         return $this->db->where('id_pelanggan', $id)->get('tb_pemesanan')->result_array();
+    }
+    public function transaksi_by_nota($id)
+    {
+        return $this->db->where('nota_pemesanan', $id)->get('tb_pemesanan')->row_array();
     }
     public function get_nota($id)
     {

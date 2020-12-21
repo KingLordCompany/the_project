@@ -53,37 +53,113 @@
             float: none;
         }
     }
+
+    .title {
+        background-color: rgb(24, 24, 24);
+        color: white;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        text-align: center;
+        font-size: xx-large;
+    }
+
+    .header {
+        margin: 1%;
+    }
+
+    .content {
+        padding: 1%;
+    }
+
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td,
+    #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #customers tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #customers tr:hover {
+        background-color: #ddd;
+    }
+
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4caf50;
+        color: white;
+    }
+
+    .total {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4caf50;
+        color: white;
+    }
+
+    .data {
+        display: inline-block;
+    }
 </style>
 <!-- </head> -->
 
 <body>
     <div class="header">
-        <div class="logo">KATERING KU</div>
+        <div class="logo">DeeSqi Cathering</div>
     </div>
-
-    <div style="padding-left:20px">
-        <h1>TERIMA KASIH TELAH MELAKUKAN PEMESANAN</h1>
-        <h2>Setelah Melakukan Pemesanan Lakukan Langkah Berikut Sebegai Berikut :</h2>
-        <ol>
-            <h3>
-                <li>Lakukan tranfer Bank sesuai nominal total pemesanan <br> Pilihan Bank :
-                    <ol>
-                        <?php
-                        foreach ($bank as $key) { ?>
-                            <li><?= $key['tipe_bayar'] ?> : <?= $key['no_rekening'] ?> <?= " ( " . $key['nama_rekening'] . " ) " ?></li>
-                        <?php } ?>
-
-                    </ol>
-                </li>
-                <li>Foto Atau Screenshot Bukti Tranfer via Bank</li>
-                <li>Buka menu keranjang <br>
-                    <!-- <img src="<?= base_url('assets/img/langkah_transfer/langkah1.png') ?>" alt=""></li> -->
-                <li>Pilih pesanan yang sudah di tranfer
-                    <!-- <br> <img src="<?= base_url('assets/img/langkah_transfer/langkah2.png') ?>" alt=""> -->
-                </li>
-                </li>
-                <li>Lakukan validasi dengan mengirim bukti foto atau screenshot tranfer via bank</li>
-            </h3>
-        </ol>
+    <div class="header">
+        <pre class="data">
+        Nomor tensaksi   : <?= $transaksi['nota_pemesanan'] ?> <br>
+        Tanggal Pesan    : <?= $transaksi['tgl_order'] ?> <br>
+        Tipe Bayar       : <?= $transaksi['tipe_bayar'] ?> <br>
+        Nomor Pelanggan  : <?= $pelanggan['nm_pelanggan'] ?> <br>
+        Tanggal Antar    : <?= $transaksi['tgl_antar'] ?><br>
+        Status Bayar     : <?= $transaksi['status_bayar'] ?>
+        </pre>
+    </div>
+    <div class="content">
+        <table id="customers">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Pesanan</th>
+                    <th scope="col">Catatan</th>
+                    <th scope="col">Jumlah</th>
+                    <th scope="col">Satuan</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $detail_transaksi = $this->Katering_Model->detail_where($transaksi['nota_pemesanan']);
+                $no = 1;
+                $total = 0;
+                foreach ($detail_transaksi as $det_trans) {
+                    $total += $det_trans['total_harga'];
+                ?>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $det_trans['nama_produk'] ?></td>
+                        <td><?= $det_trans['catatan'] ?></td>
+                        <td><?= $det_trans['jumlah_pesan'] ?></td>
+                        <td>Rp. <?= number_format($det_trans['harga']) ?></td>
+                        <td>Rp. <?= number_format($det_trans['total_harga']) ?></td>
+                    </tr>
+                <?php } ?>
+                <tr>
+                    <td colspan="5" class="bg-info text-white">Total</td>
+                    <td colspan="1">Rp. <?= number_format($total) ?></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>

@@ -41,8 +41,9 @@
                                 <td><?= $trans['status_bayar'] ?></td>
                                 <td>Rp. <?= number_format($total['total']) ?></td>
                                 <td>
+                                <a href="<?= base_url("katering/tampil/" . $trans['nota_pemesanan']) ?>" class="btn btn-success btn-sm"><i class="fa-fw fas fa-print"></i></a>
 
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletemodal<?= $trans['nota_pemesanan'] ?>">
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletemodal<?= $trans['nota_pemesanan'] ?>">
                                         <i class="fa-fw fas fa-edit"></i>
                                     </button>
                                     <!-- Edit Status -->
@@ -91,7 +92,7 @@
                                         </div>
                                     </div>
                                     <!-- End Edit Status -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal<?= $trans['nota_pemesanan'] ?>">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editmodal<?= $trans['nota_pemesanan'] ?>">
                                         <i class="fa-fw fas fa-list"></i>
                                     </button>
                                     <!-- Modal Edit -->
